@@ -366,7 +366,7 @@ $("naka-copy2").innerHTML = `<p>The clearer cases sit elsewhere on the same list
 $("inactive").innerHTML = `<thead><tr><th>Player</th><th class="n">Rating</th><th class="n">Age</th><th class="n">Games, last 12 lists</th><th class="n">Months since last game</th><th class="n">Return adjustment</th></tr></thead><tbody>` +
   inact.map((t) => {
     const nm = t.name.includes(",") ? t.name.split(",").reverse().join(" ").trim() : t.name;
-    const since = t.months_since_last_game == null ? "70+" : t.months_since_last_game;
+    const since = t.months_since_last_game == null ? "168+" : t.months_since_last_game;
     const adj = t.return_adjustment ? signed(t.return_adjustment) : "none";
     return `<tr><td>${nm}<span class="note">${t.flag === "i" ? "flagged inactive" : "active"}</span></td><td class="n">${t.rating}</td><td class="n">${t.age ?? ""}</td><td class="n">${t.classical_games_last_12_months}</td><td class="n">${since}</td><td class="n ${t.return_adjustment < 0 ? "neg" : ""}">${adj}</td></tr>`;
   }).join("") + "</tbody>";

@@ -1,0 +1,304 @@
+{
+  "inactivity_controlled": [
+    {
+      "age": "under 21",
+      "gap": "3-5 months",
+      "plain": 32.283923661601634,
+      "controlled": 5.615909775508466
+    },
+    {
+      "age": "under 21",
+      "gap": "6-11 months",
+      "plain": 38.07143192662174,
+      "controlled": 12.924267282981411
+    },
+    {
+      "age": "under 21",
+      "gap": "1-2 years",
+      "plain": 39.39219644810175,
+      "controlled": 15.205674344114609
+    },
+    {
+      "age": "under 21",
+      "gap": "2-4 years",
+      "plain": 44.488020561186204,
+      "controlled": 23.15516186839157
+    },
+    {
+      "age": "under 21",
+      "gap": "4+ years",
+      "plain": 34.72090074092364,
+      "controlled": 17.741727852512156
+    },
+    {
+      "age": "21-49",
+      "gap": "3-5 months",
+      "plain": -16.89232666199081,
+      "controlled": -5.500660263081315
+    },
+    {
+      "age": "21-49",
+      "gap": "6-11 months",
+      "plain": -27.610711768005746,
+      "controlled": -15.363601841285671
+    },
+    {
+      "age": "21-49",
+      "gap": "1-2 years",
+      "plain": -41.329583646978826,
+      "controlled": -27.271423276234874
+    },
+    {
+      "age": "21-49",
+      "gap": "2-4 years",
+      "plain": -49.577958741105725,
+      "controlled": -34.29361825174112
+    },
+    {
+      "age": "21-49",
+      "gap": "4+ years",
+      "plain": -90.19641768716205,
+      "controlled": -70.94280253708227
+    },
+    {
+      "age": "50 and over",
+      "gap": "3-5 months",
+      "plain": -56.193627110652365,
+      "controlled": -12.438288457251705
+    },
+    {
+      "age": "50 and over",
+      "gap": "6-11 months",
+      "plain": -72.71878131295539,
+      "controlled": -27.58457694036996
+    },
+    {
+      "age": "50 and over",
+      "gap": "1-2 years",
+      "plain": -93.65056506460789,
+      "controlled": -45.182151129693615
+    },
+    {
+      "age": "50 and over",
+      "gap": "2-4 years",
+      "plain": -111.1324638142995,
+      "controlled": -63.25639290538495
+    },
+    {
+      "age": "50 and over",
+      "gap": "4+ years",
+      "plain": -174.0136747972313,
+      "controlled": -119.61988523209193
+    }
+  ],
+  "gap_scale_by_band": [
+    {
+      "band": "below 1800",
+      "games": 59049,
+      "gap_scale": 0.6393768871127805,
+      "white": 20.771406099816378
+    },
+    {
+      "band": "1800-2199",
+      "games": 367216,
+      "gap_scale": 0.7085954097112812,
+      "white": 26.619084799544286
+    },
+    {
+      "band": "2200-2499",
+      "games": 693269,
+      "gap_scale": 0.8188506046378328,
+      "white": 31.42189651431506
+    },
+    {
+      "band": "2500+",
+      "games": 271013,
+      "gap_scale": 0.9486896035634308,
+      "white": 38.929007965699775
+    }
+  ],
+  "inactivity_by_rating_level": [
+    {
+      "level": "below 2000",
+      "gap": "active (0-2 months)",
+      "player_games": 148456,
+      "score_vs_expected_pct": -0.6903608452938805
+    },
+    {
+      "level": "below 2000",
+      "gap": "3-5 months",
+      "player_games": 73771,
+      "score_vs_expected_pct": -1.6606168795412601
+    },
+    {
+      "level": "below 2000",
+      "gap": "6-11 months",
+      "player_games": 45138,
+      "score_vs_expected_pct": -2.743550844384343
+    },
+    {
+      "level": "below 2000",
+      "gap": "1-2 years",
+      "player_games": 25376,
+      "score_vs_expected_pct": -4.3950761740985325
+    },
+    {
+      "level": "below 2000",
+      "gap": "2-4 years",
+      "player_games": 10014,
+      "score_vs_expected_pct": -4.8467740992962
+    },
+    {
+      "level": "below 2000",
+      "gap": "4+ years",
+      "player_games": 5657,
+      "score_vs_expected_pct": -9.277854663938918
+    },
+    {
+      "level": "2000-2299",
+      "gap": "active (0-2 months)",
+      "player_games": 369958,
+      "score_vs_expected_pct": -0.828885463174682
+    },
+    {
+      "level": "2000-2299",
+      "gap": "3-5 months",
+      "player_games": 127246,
+      "score_vs_expected_pct": -1.8406099051044584
+    },
+    {
+      "level": "2000-2299",
+      "gap": "6-11 months",
+      "player_games": 65203,
+      "score_vs_expected_pct": -2.782601826218425
+    },
+    {
+      "level": "2000-2299",
+      "gap": "1-2 years",
+      "player_games": 29388,
+      "score_vs_expected_pct": -4.505996947483467
+    },
+    {
+      "level": "2000-2299",
+      "gap": "2-4 years",
+      "player_games": 10548,
+      "score_vs_expected_pct": -5.709828846295724
+    },
+    {
+      "level": "2000-2299",
+      "gap": "4+ years",
+      "player_games": 7282,
+      "score_vs_expected_pct": -12.848605197283778
+    },
+    {
+      "level": "2300+",
+      "gap": "active (0-2 months)",
+      "player_games": 659305,
+      "score_vs_expected_pct": -1.2754727463579776
+    },
+    {
+      "level": "2300+",
+      "gap": "3-5 months",
+      "player_games": 133237,
+      "score_vs_expected_pct": -2.2011803273123904
+    },
+    {
+      "level": "2300+",
+      "gap": "6-11 months",
+      "player_games": 50776,
+      "score_vs_expected_pct": -3.7368383306487223
+    },
+    {
+      "level": "2300+",
+      "gap": "1-2 years",
+      "player_games": 17928,
+      "score_vs_expected_pct": -4.782567175043728
+    },
+    {
+      "level": "2300+",
+      "gap": "2-4 years",
+      "player_games": 5210,
+      "score_vs_expected_pct": -6.3268557777903816
+    },
+    {
+      "level": "2300+",
+      "gap": "4+ years",
+      "player_games": 2272,
+      "score_vs_expected_pct": -11.28578852371021
+    }
+  ],
+  "without_pandemic": {
+    "backtest": {
+      "FIDE as published": {
+        "log_loss": 0.5981122949293516,
+        "brier": 0.12358599160694243,
+        "vs_fide": 0.0
+      },
+      "FIDE + white advantage": {
+        "log_loss": 0.5946733545018568,
+        "brier": 0.12213863316247649,
+        "vs_fide": -0.0034389404274948517
+      },
+      "FIDE + white + gap scale": {
+        "log_loss": 0.58996691624236,
+        "brier": 0.12054876123265117,
+        "vs_fide": -0.008145378686991623
+      },
+      "FIDE + white + age": {
+        "log_loss": 0.5892066283112561,
+        "brier": 0.12023515876385467,
+        "vs_fide": -0.008905666618095396
+      },
+      "FIDE + white + recent form": {
+        "log_loss": 0.5904830047870554,
+        "brier": 0.12070248286243346,
+        "vs_fide": -0.007629290142296152
+      },
+      "FIDE + white + gap + age + form": {
+        "log_loss": 0.5852644020330339,
+        "brier": 0.11877367343164208,
+        "vs_fide": -0.012847892896317674
+      },
+      "Elo rebuilt on this data": {
+        "log_loss": 0.6227364486372119,
+        "brier": 0.1323988681425073,
+        "vs_fide": 0.02462415370786038
+      },
+      "Glicko-2 rebuilt on this data": {
+        "log_loss": 0.6225765146079119,
+        "brier": 0.13180345581324462,
+        "vs_fide": 0.024464219678560335
+      }
+    },
+    "simulation": {
+      "FIDE rules (control)": {
+        "brier": 0.12358599160694243,
+        "vs_control": 0.0
+      },
+      "Stretched table": {
+        "brier": 0.12194954778485378,
+        "vs_control": -0.005258649199678001
+      },
+      "K-factor by age": {
+        "brier": 0.12374158716206046,
+        "vs_control": 0.0005008990722231465
+      },
+      "Inactivity adjustment": {
+        "brier": 0.1231184807423069,
+        "vs_control": -0.0013388466313685374
+      },
+      "Uncertainty K-factor": {
+        "brier": 0.12547443195814928,
+        "vs_control": 0.004818755283155757
+      },
+      "Table + inactivity adjustment": {
+        "brier": 0.12156929495348731,
+        "vs_control": -0.006276208538237423
+      },
+      "Table + inactivity + uncertainty K": {
+        "brier": 0.12325374276693488,
+        "vs_control": -0.0021797018862725922
+      }
+    }
+  }
+}

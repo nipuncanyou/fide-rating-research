@@ -1,0 +1,5 @@
+\begin{tikzpicture}
+\begin{axis}[ybar, width=0.8\linewidth, height=5.8cm, bar width=16pt, ylabel={Elo points vs.\ rating}, xlabel={Age group (reference: 21--49)}, xtick={1,...,7}, xticklabels={$\leq$11,12--13,14--15,16--17,18--20,50--64,65+}, xmin=0.4, xmax=7.6, ymin=-85, ymax=70, grid=major, grid style={gray!25}, tick label style={font=\small}, nodes near coords, nodes near coords style={font=\scriptsize}, every node near coord/.append style={/pgf/number format/fixed, /pgf/number format/precision=0}]
+\addplot[fill=teal!45, draw=teal!70!black] coordinates {(1,36.8) (2,50.7) (3,46.7) (4,36.2) (5,31.8) (6,-36.5) (7,-71.0)};
+\end{axis}
+\end{tikzpicture}

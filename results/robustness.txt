@@ -1,0 +1,56 @@
+1390547 test-season games
+inactivity offsets, plain vs controlled for age and form:
+      under 21   3-5 months:   +32.3    +5.6
+      under 21  6-11 months:   +38.1   +12.9
+      under 21    1-2 years:   +39.4   +15.2
+      under 21    2-4 years:   +44.5   +23.2
+      under 21     4+ years:   +34.7   +17.7
+         21-49   3-5 months:   -16.9    -5.5
+         21-49  6-11 months:   -27.6   -15.4
+         21-49    1-2 years:   -41.3   -27.3
+         21-49    2-4 years:   -49.6   -34.3
+         21-49     4+ years:   -90.2   -70.9
+   50 and over   3-5 months:   -56.2   -12.4
+   50 and over  6-11 months:   -72.7   -27.6
+   50 and over    1-2 years:   -93.7   -45.2
+   50 and over    2-4 years:  -111.1   -63.3
+   50 and over     4+ years:  -174.0  -119.6
+gap scale, higher-rated player below 1800: 0.639 (59049 games)
+gap scale, higher-rated player  1800-2199: 0.709 (367216 games)
+gap scale, higher-rated player  2200-2499: 0.819 (693269 games)
+gap scale, higher-rated player      2500+: 0.949 (271013 games)
+adults, score vs expectation by rating level and break:
+  below 2000  active (0-2 months):  -0.69% (148456)
+  below 2000           3-5 months:  -1.66% (73771)
+  below 2000          6-11 months:  -2.74% (45138)
+  below 2000            1-2 years:  -4.40% (25376)
+  below 2000            2-4 years:  -4.85% (10014)
+  below 2000             4+ years:  -9.28% (5657)
+   2000-2299  active (0-2 months):  -0.83% (369958)
+   2000-2299           3-5 months:  -1.84% (127246)
+   2000-2299          6-11 months:  -2.78% (65203)
+   2000-2299            1-2 years:  -4.51% (29388)
+   2000-2299            2-4 years:  -5.71% (10548)
+   2000-2299             4+ years: -12.85% (7282)
+       2300+  active (0-2 months):  -1.28% (659305)
+       2300+           3-5 months:  -2.20% (133237)
+       2300+          6-11 months:  -3.74% (50776)
+       2300+            1-2 years:  -4.78% (17928)
+       2300+            2-4 years:  -6.33% (5210)
+       2300+             4+ years: -11.29% (2272)
+without pandemic seasons:
+  backtest FIDE as published                  +0.00000
+  backtest FIDE + white advantage             -0.00344
+  backtest FIDE + white + gap scale           -0.00815
+  backtest FIDE + white + age                 -0.00891
+  backtest FIDE + white + recent form         -0.00763
+  backtest FIDE + white + gap + age + form    -0.01285
+  backtest Elo rebuilt on this data           +0.02462
+  backtest Glicko-2 rebuilt on this data      +0.02446
+  replay   FIDE rules (control)                 +0.00000
+  replay   Stretched table                      -0.00526
+  replay   K-factor by age                      +0.00050
+  replay   Inactivity adjustment                -0.00134
+  replay   Uncertainty K-factor                 +0.00482
+  replay   Table + inactivity adjustment        -0.00628
+  replay   Table + inactivity + uncertainty K   -0.00218
