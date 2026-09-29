@@ -1,0 +1,580 @@
+<meta charset="utf-8">
+<title>Where FIDE Ratings Miss</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --paper: #eceee8;
+  --surface: #f6f7f3;
+  --ink: #1a2320;
+  --muted: #56605b;
+  --rule: #c9cec6;
+  --board: #2e5b47;
+  --brass: #94701f;
+  --clay: #a2442f;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #121715; --surface: #1a201d; --ink: #e3e7e1; --muted: #9aa39d;
+    --rule: #2e3632; --board: #74b195; --brass: #d1aa55; --clay: #d9785f;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #121715; --surface: #1a201d; --ink: #e3e7e1; --muted: #9aa39d;
+  --rule: #2e3632; --board: #74b195; --brass: #d1aa55; --clay: #d9785f;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 17px/1.6 var(--sans);
+  padding-inline: 20px;
+  padding-block: 0 64px;
+}
+main { max-width: 760px; margin: 0 auto; }
+.prose { max-width: 66ch; }
+
+header { padding-block: 56px 32px; border-bottom: 2px solid var(--ink); }
+.eyebrow {
+  font: 500 12px/1.4 var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 18px;
+}
+h1 {
+  font: 700 clamp(40px, 7vw, 64px)/1.02 var(--serif);
+  letter-spacing: -.02em;
+  margin: 0 0 20px;
+  text-wrap: balance;
+}
+.dek { font: 400 21px/1.45 var(--serif); margin: 0 0 20px; max-width: 34em; text-wrap: pretty; }
+.byline { font: 500 14px/1.4 var(--sans); margin: 0; }
+.byline span { color: var(--muted); font-weight: 400; }
+
+.figures {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid var(--rule);
+}
+.figures div { padding: 22px 16px 22px 0; display: grid; gap: 6px; align-content: start; }
+.figures div + div { padding-left: 16px; border-left: 1px solid var(--rule); }
+.figures b { font: 600 36px/1 var(--serif); font-variant-numeric: tabular-nums; }
+.figures span { font-size: 14px; line-height: 1.4; color: var(--muted); }
+
+section { padding-block: 40px 8px; border-bottom: 1px solid var(--rule); }
+.num { font: 500 13px/1 var(--mono); color: var(--board); margin: 0 0 10px; letter-spacing: .04em; }
+h2 { font: 600 30px/1.15 var(--serif); margin: 0 0 16px; text-wrap: balance; letter-spacing: -.01em; }
+h3 { font: 600 13px/1.3 var(--mono); text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin: 28px 0 10px; }
+p { margin: 0 0 16px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--mono); font-size: .86em; }
+
+figure { margin: 24px 0 28px; }
+figure svg { width: 100%; height: auto; display: block; }
+figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 66ch; }
+.key { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+.key span { display: inline-flex; align-items: center; gap: 8px; }
+.sw { width: 18px; height: 0; border-top: 2px solid; display: inline-block; }
+.sw.dash { border-top-style: dashed; }
+.sw.dot { width: 8px; height: 8px; border: 0; background: var(--ink); }
+.sw.box { width: 10px; height: 10px; border: 0; }
+
+.table-wrap { overflow-x: auto; margin: 20px 0 28px; }
+table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 15px; }
+th, td { text-align: left; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--rule); vertical-align: baseline; }
+th { font: 500 12px/1.3 var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); border-bottom: 1.5px solid var(--ink); }
+td.n { font-family: var(--mono); font-size: 14px; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+th.n { text-align: right; }
+tr.base td { color: var(--muted); }
+tr.best td { font-weight: 600; }
+tr.best td.n { color: var(--board); }
+tr.worse td.n:last-child { color: var(--clay); }
+td .note { display: block; font-size: 13px; color: var(--muted); font-weight: 400; }
+td.neg { color: var(--clay); }
+
+ol.proposals { list-style: none; padding: 0; margin: 8px 0 24px; counter-reset: p; }
+ol.proposals li { counter-increment: p; display: grid; grid-template-columns: 44px 1fr; gap: 0 12px; padding: 16px 0; border-top: 1px solid var(--rule); }
+ol.proposals li::before { content: counter(p, decimal-leading-zero); font: 500 14px/1.6 var(--mono); color: var(--board); }
+ol.proposals b { display: block; font-family: var(--serif); font-size: 19px; font-weight: 600; margin-bottom: 4px; }
+.status { display: inline-block; font: 500 11px/1 var(--mono); text-transform: uppercase; letter-spacing: .07em; padding: 4px 6px; margin-bottom: 8px; border: 1px solid currentColor; }
+.status.yes { color: var(--board); }
+.status.no { color: var(--clay); }
+.status.open { color: var(--muted); }
+ul.plain { padding-left: 18px; margin: 0 0 20px; }
+ul.plain li { margin-bottom: 8px; }
+pre { background: var(--surface); border: 1px solid var(--rule); padding: 14px 16px; overflow-x: auto; font: 400 13.5px/1.6 var(--mono); margin: 0 0 20px; }
+footer { padding-top: 28px; font-size: 14px; color: var(--muted); }
+a { color: var(--board); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--board); outline-offset: 2px; }
+
+.axis text, .lbl { fill: var(--muted); font: 400 12px var(--mono); }
+.axis line, .grid line { stroke: var(--rule); stroke-width: 1; }
+.zero { stroke: var(--ink); stroke-width: 1.2; }
+
+@media (max-width: 640px) {
+  body { font-size: 16px; padding-inline: 16px; }
+  header { padding-block: 36px 24px; }
+  .dek { font-size: 18px; }
+  .figures { grid-template-columns: 1fr 1fr; }
+  .figures div:nth-child(3) { padding-left: 0; border-left: 0; }
+  .figures div:nth-child(n+3) { border-top: 1px solid var(--rule); }
+  .figures b { font-size: 30px; }
+  h2 { font-size: 25px; }
+}
+</style>
+
+<main>
+  <header>
+    <p class="eyebrow">Independent rating research &middot; September 2026</p>
+    <h1>Where FIDE Ratings Miss</h1>
+    <p class="dek" id="dek"></p>
+    <p class="byline">Nipun Anand <span>&middot; data from The Week in Chess and FIDE rating lists</span></p>
+  </header>
+
+  <div class="figures" id="figures"></div>
+
+  <section>
+    <p class="num">The question</p>
+    <h2>Does the FIDE rating list predict results as well as it could?</h2>
+    <div class="prose">
+      <p>Every classical rating on the FIDE list implies a prediction. Two players 200 points apart should, by FIDE's own conversion table, see the favourite score about 76%. If the list is right, those predictions should come true on average, for every age group, rating band and colour, and for players who have not played in a while.</p>
+      <p>This study checks that on twelve seasons of real games in two steps. First it fits small corrections on one season of results and tests them on the next, which the corrections never saw, and repeats that for every season. Then it replays the rating rules month by month, FIDE's current rules against proposed changes, and scores each the same way.</p>
+    </div>
+    <h3>Data</h3>
+    <div class="prose" id="data-copy"></div>
+    <h3>Method</h3>
+    <div class="prose">
+      <p>A season runs October to September. Every correction is fitted on one season and <strong>tested on the next</strong>, for each of the eleven test seasons from 2015-16 to 2025-26. The charts on the findings below come from the latest pair: fitted on 2024-25, tested on 2025-26. Each model predicts White's expected score before the game. Accuracy is scored with log loss and Brier score (mean squared error on 1, &frac12;, 0). Confidence intervals come from 1,000 bootstrap resamples of whole events, because games inside one tournament are not independent.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="num">Finding 1</p>
+    <h2>FIDE's table overstates the favourite</h2>
+    <div class="prose" id="f1-copy"></div>
+    <figure>
+      <div class="key">
+        <span><i class="sw dash" style="border-color:var(--brass)"></i>FIDE expected score</span>
+        <span><i class="sw" style="border-color:var(--board)"></i>Corrected model</span>
+        <span><i class="sw dot"></i>Actual score</span>
+      </div>
+      <svg id="calib" viewBox="0 0 720 360" role="img" aria-labelledby="calib-t"><title id="calib-t">Higher-rated player's score by rating gap</title></svg>
+      <figcaption id="calib-cap"></figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <p class="num">Finding 2</p>
+    <h2>Juniors are underrated, seniors overrated</h2>
+    <div class="prose" id="f2-copy"></div>
+    <figure>
+      <svg id="ages" viewBox="0 0 720 330" role="img" aria-labelledby="ages-t"><title id="ages-t">Rating correction by age group in Elo points</title></svg>
+      <figcaption>Correction in Elo points relative to players aged 21 to 49, fitted on the training year. A bar of +50 means that group plays like players rated 50 points higher.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <p class="num">Finding 3</p>
+    <h2>Adults come back from a break weaker than their rating</h2>
+    <div class="prose" id="f5-copy"></div>
+    <figure>
+      <div class="key">
+        <span><i class="sw" style="border-color:var(--board)"></i>Under 21</span>
+        <span><i class="sw" style="border-color:var(--brass)"></i>21 to 49</span>
+        <span><i class="sw" style="border-color:var(--clay)"></i>50 and over</span>
+      </div>
+      <svg id="decay" viewBox="0 0 720 360" role="img" aria-labelledby="decay-t"><title id="decay-t">Score against FIDE expectation by time since last rated game</title></svg>
+      <figcaption id="decay-cap"></figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <p class="num">A test case</p>
+    <h2>Is Nakamura sitting on his rating?</h2>
+    <div class="prose" id="naka-copy"></div>
+    <figure>
+      <div class="key">
+        <span><i class="sw" style="border-color:var(--ink)"></i>Published classical rating</span>
+        <span><i class="sw box" style="background:var(--brass)"></i>Rated classical games in that list</span>
+      </div>
+      <svg id="naka" viewBox="0 0 720 380" role="img" aria-labelledby="naka-t"><title id="naka-t">Hikaru Nakamura's rating and rated games by monthly list</title></svg>
+      <figcaption>FIDE standard lists, January 2024 to September 2026. A list's games were mostly played the month before it was published.</figcaption>
+    </figure>
+    <div class="prose" id="naka-copy2"></div>
+    <div class="table-wrap"><table id="inactive"></table></div>
+  </section>
+
+  <section>
+    <p class="num">Finding 4</p>
+    <h2>Ratings trail current form</h2>
+    <div class="prose" id="f3-copy"></div>
+  </section>
+
+  <section>
+    <p class="num">Finding 5</p>
+    <h2 id="f4-h"></h2>
+    <div class="prose" id="f4-copy"></div>
+  </section>
+
+  <section>
+    <p class="num">Results</p>
+    <h2>How much each correction helps</h2>
+    <div class="prose"><p>All rows are scored on the same <span id="test-n"></span> games across the eleven test seasons, each correction fitted on the season before its test. Lower is better. The change column is the difference in log loss against the published FIDE ratings, with its 95% interval.</p></div>
+    <div class="table-wrap"><table id="models"></table></div>
+    <div class="prose" id="glicko-copy"></div>
+  </section>
+
+  <section>
+    <p class="num">Every season</p>
+    <h2>The pattern holds in all eleven test seasons</h2>
+    <div class="prose" id="season-copy"></div>
+    <figure>
+      <div class="key">
+        <span><i class="sw" style="border-color:var(--ink)"></i>All corrections</span>
+        <span><i class="sw" style="border-color:var(--board)"></i>Age</span>
+        <span><i class="sw" style="border-color:var(--brass)"></i>Gap scale</span>
+        <span><i class="sw dash" style="border-color:var(--muted)"></i>White advantage</span>
+      </div>
+      <svg id="seasons" viewBox="0 0 720 340" role="img" aria-labelledby="seasons-t"><title id="seasons-t">Reduction in prediction error by test season</title></svg>
+      <figcaption>Reduction in Brier score against the published FIDE ratings, by test season. Each correction was fitted on the season before.</figcaption>
+    </figure>
+    <div class="table-wrap"><table id="season-table"></table></div>
+  </section>
+
+  <section>
+    <p class="num">Simulation</p>
+    <h2>Replaying the rules month by month</h2>
+    <div class="prose">
+      <p>A correction that predicts well is not yet a rule FIDE can adopt. A rule changes ratings, and changed ratings feed into every later game. So each candidate rule was replayed month by month from October 2014 to September 2026, next to FIDE's current rules, using the K-factor FIDE actually applied to each player each month. The first season is a warm-up. From 2015-16 on, each season's rule uses settings fitted on the season before.</p>
+      <p>The official rating in each game already reflects every rated game in the world, and most of those are not in this sample. So each rule keeps a running difference from the official rating for every player, and that difference is what the rule changes. Under FIDE's own rules the difference stays at zero, which makes the control exact.</p>
+    </div>
+    <div class="table-wrap"><table id="sim"></table></div>
+    <div class="prose" id="sim-copy"></div>
+  </section>
+
+  <section>
+    <p class="num">For FIDE</p>
+    <h2>What this suggests for the rating regulations</h2>
+    <ol class="proposals" id="proposals"></ol>
+  </section>
+
+  <section>
+    <p class="num">Limits</p>
+    <h2>What this study does not show</h2>
+    <ul class="plain prose">
+      <li>The first eleven seasons include the pandemic, when over-the-board chess nearly stopped. Those seasons have fewer games, and FIDE also made a one-off rating adjustment in March 2024.</li>
+      <li>Breaks are measured from FIDE lists that begin in September 2012, so in the earliest seasons a break of four years or more cannot be seen and is left out.</li>
+      <li>Since October 2025, FIDE's 400-point rule applies only to players rated below 2650. This study applies it to everyone, which affects a handful of elite games.</li>
+      <li>TWIC covers stronger, better-known events. The median rating here is <span id="median"></span>, well above the full FIDE list, so results for club-level players need their own data.</li>
+      <li>The inactivity effects are averages over mostly non-elite players. A world-class player returning from a break may lose more or less than the average.</li>
+      <li>Birth years come from the current FIDE player list. Time since last game comes from monthly game counts, so a break is measured to the nearest month.</li>
+      <li>The simulation only updates ratings from games in this sample. A rule that FIDE adopts would act on every rated game, which the replay approximates but does not reproduce.</li>
+      <li>The junior problem is still open. Neither a larger K-factor for juniors nor an uncertainty-based K-factor helped, so juniors need a different kind of fix.</li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="num">Reproduce</p>
+    <h2>Run it yourself</h2>
+    <div class="prose"><p>Plain Python 3, no packages. Game files come from <a href="https://theweekinchess.com/twic">The Week in Chess</a> (issues 1038 to 1664) and player data from the <a href="https://ratings.fide.com/download_lists.phtml">FIDE download page</a>.</p></div>
+    <pre>python3 src/fetch_twic.py     # TWIC game files, 2014 to 2026
+python3 src/prepare.py        # games from TWIC, fast events removed by name
+python3 src/fetch_lists.py    # FIDE monthly lists, September 2012 onward
+python3 src/verify_events.py  # keeps events confirmed as classical
+python3 src/backtest.py       # corrections, fitted and tested
+python3 src/simulate.py       # month-by-month rule replay
+python3 src/build_report.py</pre>
+  </section>
+
+  <footer>Nipun Anand, September 2026. Data: The Week in Chess, FIDE rating lists. Ratings shown are FIDE standard ratings as published at the time of each game.</footer>
+</main>
+
+<script>
+const D = {"train_games": 149726, "test_games": 141723, "composition": {"players": 82111, "events": 14337, "median_rating": 2229, "p10_rating": 1842, "p90_rating": 2496, "share_known_age": 0.9983418358346916, "draw_rate": 0.3342153355489229, "white_score": 0.5406250220500554}, "calibration_stronger": [{"gap_from": 0, "games": 19082, "fide": 0.5361326414085302, "gap_model": 0.5295797389383068, "actual": 0.5330940153023792}, {"gap_from": 50, "games": 23467, "fide": 0.6067378651356581, "gap_model": 0.5873821152641103, "actual": 0.5803255635573359}, {"gap_from": 100, "games": 26095, "fide": 0.6715139832371246, "gap_model": 0.6421183227226491, "actual": 0.633722935428243}, {"gap_from": 150, "games": 23563, "fide": 0.730632553483777, "gap_model": 0.6937028064152606, "actual": 0.6896617578406824}, {"gap_from": 200, "games": 17481, "fide": 0.7827865758086823, "gap_model": 0.7409350654026444, "actual": 0.739345575195927}, {"gap_from": 250, "games": 11876, "fide": 0.8275924608156443, "gap_model": 0.7834193854649141, "actual": 0.7828814415628158}, {"gap_from": 300, "games": 7454, "fide": 0.8646118709698863, "gap_model": 0.820021935150274, "actual": 0.828213039978535}, {"gap_from": 350, "games": 4605, "fide": 0.8949136409407653, "gap_model": 0.8525114856213911, "actual": 0.8543973941368078}, {"gap_from": 400, "games": 7917, "fide": 0.9090909090909786, "gap_model": 0.8682273978947217, "actual": 0.9219401288366805}], "models": [{"model": "FIDE as published", "log_loss": 0.6008748896365851, "brier": 0.12347729339235278, "vs_fide_log_loss": 0.0, "ci_low": 0.0, "ci_high": 0.0}, {"model": "FIDE + white advantage", "log_loss": 0.5972880674706399, "brier": 0.12194941668742386, "vs_fide_log_loss": -0.0035868221657262066, "ci_low": -0.003922107533583226, "ci_high": -0.0032381641436794607}, {"model": "FIDE + white + gap scale", "log_loss": 0.5949778657156634, "brier": 0.12100271476069355, "vs_fide_log_loss": -0.0058970239207269, "ci_low": -0.0067054678004260584, "ci_high": -0.005012141789239607}, {"model": "FIDE + white + age", "log_loss": 0.5940446844087277, "brier": 0.12070597589943871, "vs_fide_log_loss": -0.006830205227680148, "ci_low": -0.007473412084668088, "ci_high": -0.006240356236511804}, {"model": "FIDE + white + recent form", "log_loss": 0.5944225442271419, "brier": 0.12088727068066053, "vs_fide_log_loss": -0.0064523454092899205, "ci_low": -0.007034838396538904, "ci_high": -0.005836619060395634}, {"model": "FIDE + white + gap + age + form", "log_loss": 0.5914593762552446, "brier": 0.11965066292738138, "vs_fide_log_loss": -0.009415513381189535, "ci_low": -0.01023402065741856, "ci_high": -0.008606409531852821}, {"model": "Elo rebuilt on this data", "log_loss": 0.6421447895539715, "brier": 0.1385773770273701, "vs_fide_log_loss": 0.04126989991740312, "ci_low": 0.03872462424236468, "ci_high": 0.044376866340571294}, {"model": "Glicko-2 rebuilt on this data", "log_loss": 0.6399462910722828, "brier": 0.13751501623994145, "vs_fide_log_loss": 0.03907140143586095, "ci_low": 0.036286469845635105, "ci_high": 0.04225312234836545}], "glicko_vs_elo_same_data": {"mean": -0.002198498481542091, "ci_low": -0.003633886024576532, "ci_high": -0.0008736669995616588}, "glicko_params": {"initial_rd": 100.0, "tau": 0.6}, "fitted_elo_points": {"white advantage": 33.66265778337176, "11 and under": 36.82494956517319, "12-13": 50.68232215028212, "14-15": 46.66653768243047, "16-17": 36.15739198632393, "18-20": 31.756832901355928, "50-64": -36.46471966393751, "65+": -71.00304177156944}, "full_model_params": {"gap scale": 0.8789875445983739, "white advantage": 32.334580003665465, "11 and under": 9.97065045720908, "12-13": 25.349417770651037, "14-15": 26.489430317491053, "16-17": 20.64493901641504, "18-20": 21.069988361125255, "50-64": -33.181868902311415, "65+": -66.8248057954297, "form": 193.53127350568656}, "gap_scale_model": {"gap scale": 0.8223440427005066, "white advantage": 32.01730640169262}, "form_coefficients": {"FIDE + white + recent form": 315.3096612256535, "FIDE + white + gap + age + form": 193.53127350568656}, "calibration": [{"diff_from": -400, "games": 6057, "expected": 0.09588485041196841, "actual": 0.11779758956579164}, {"diff_from": -350, "games": 3648, "expected": 0.13482092615283928, "actual": 0.19709429824561403}, {"diff_from": -300, "games": 5726, "expected": 0.17183455487198734, "actual": 0.2506112469437653}, {"diff_from": -250, "games": 8501, "expected": 0.21631987725418678, "actual": 0.302023291377485}, {"diff_from": -200, "games": 11498, "expected": 0.26855758190253165, "actual": 0.3487563054444251}, {"diff_from": -150, "games": 12998, "expected": 0.3272205550654884, "actual": 0.4079858439759963}, {"diff_from": -100, "games": 11777, "expected": 0.39177736211756276, "actual": 0.4580962893776004}, {"diff_from": -50, "games": 9758, "expected": 0.4628479719170999, "actual": 0.5118876819020292}, {"diff_from": 0, "games": 9741, "expected": 0.5352813820755924, "actual": 0.577507442767683}, {"diff_from": 50, "games": 11691, "expected": 0.6066181148127993, "actual": 0.6200923787528868}, {"diff_from": 100, "games": 13123, "expected": 0.6714576223627373, "actual": 0.6766364398384516}, {"diff_from": 150, "games": 11984, "expected": 0.7308862562870837, "actual": 0.7272196261682243}, {"diff_from": 200, "games": 8945, "expected": 0.7828148713216121, "actual": 0.7789826718837339}, {"diff_from": 250, "games": 6098, "expected": 0.827839548131088, "actual": 0.8166612003935717}, {"diff_from": 300, "games": 3770, "expected": 0.8647156516093849, "actual": 0.8547745358090185}, {"diff_from": 350, "games": 2356, "expected": 0.8948195824203197, "actual": 0.8730899830220713}, {"diff_from": 400, "games": 4052, "expected": 0.9090909090909661, "actual": 0.9338598223099703}], "age_residuals": [{"age": "11 and under", "player_games": 5043, "score_vs_expected_pct": 2.5464653102873167}, {"age": "12-13", "player_games": 12682, "score_vs_expected_pct": 3.2277349812570133}, {"age": "14-15", "player_games": 24750, "score_vs_expected_pct": 2.952941839957931}, {"age": "16-17", "player_games": 34316, "score_vs_expected_pct": 2.033845537930336}, {"age": "18-20", "player_games": 37856, "score_vs_expected_pct": 1.2830290960799957}, {"age": "21-49", "player_games": 129537, "score_vs_expected_pct": -0.6408845215432314}, {"age": "50-64", "player_games": 26823, "score_vs_expected_pct": -4.084678885256955}, {"age": "65+", "player_games": 11969, "score_vs_expected_pct": -4.198829287968368}], "rating_band_residuals": [{"band": "1400-1599", "player_games": 5409, "score_vs_expected_pct": 0.6571193975274635}, {"band": "1600-1799", "player_games": 16094, "score_vs_expected_pct": 1.5232647827414088}, {"band": "1800-1999", "player_games": 42081, "score_vs_expected_pct": 1.5103737580598675}, {"band": "2000-2199", "player_games": 66638, "score_vs_expected_pct": 0.9312508582896668}, {"band": "2200-2399", "player_games": 88189, "score_vs_expected_pct": -1.0710532068112435}, {"band": "2400-2599", "player_games": 56527, "score_vs_expected_pct": -0.8035544211516772}, {"band": "2600-2799", "player_games": 8462, "score_vs_expected_pct": -1.5874828002441461}, {"band": "2700+", "player_games": 46, "score_vs_expected_pct": -8.121816667469277}], "walk_forward": {"seasons": [{"season": 2015, "games": 127503, "models": {"FIDE as published": {"log_loss": 0.5823417392540986, "brier": 0.1201070015675621, "vs_fide": 0.0}, "FIDE + white advantage": {"log_loss": 0.5791615631528084, "brier": 0.11880169865393468, "vs_fide": -0.0031801761012902343}, "FIDE + white + gap scale": {"log_loss": 0.5771451201276008, "brier": 0.11802112739778865, "vs_fide": -0.00519661912649782}, "FIDE + white + age": {"log_loss": 0.5759577361831918, "brier": 0.11766481894861773, "vs_fide": -0.0063840030709068655}, "FIDE + white + recent form": {"log_loss": 0.5768947097975503, "brier": 0.11802858948091698, "vs_fide": -0.005447029456548391}, "FIDE + white + gap + age + form": {"log_loss": 0.5738398319678433, "brier": 0.11683933287286412, "vs_fide": -0.008501907286255325}, "Elo rebuilt on this data": {"log_loss": 0.588640587676612, "brier": 0.1224126116795729, "vs_fide": 0.006298848422513327}, "Glicko-2 rebuilt on this data": {"log_loss": 0.588017909630755, "brier": 0.1223043905651463, "vs_fide": 0.005676170376656348}}, "gap_scale": 0.8550101497905811, "white": 34.5997849880889, "age_12_13": 66.80976094402912}, {"season": 2016, "games": 139613, "models": {"FIDE as published": {"log_loss": 0.586395994010394, "brier": 0.12156082511820583, "vs_fide": 0.0}, "FIDE + white advantage": {"log_loss": 0.5830703322182621, "brier": 0.12017633603477684, "vs_fide": -0.003325661792131874}, "FIDE + white + gap scale": {"log_loss": 0.5800902844227658, "brier": 0.11915895198481107, "vs_fide": -0.0063057095876282}, "FIDE + white + age": {"log_loss": 0.5787947345240637, "brier": 0.11866334576677605, "vs_fide": -0.0076012594863303}, "FIDE + white + recent form": {"log_loss": 0.5802422115162198, "brier": 0.11921627042518214, "vs_fide": -0.006153782494174231}, "FIDE + white + gap + age + form": {"log_loss": 0.5760283329801965, "brier": 0.11764954615944402, "vs_fide": -0.010367661030197522}, "Elo rebuilt on this data": {"log_loss": 0.5967105863259183, "brier": 0.12530026655484497, "vs_fide": 0.0103145923155243}, "Glicko-2 rebuilt on this data": {"log_loss": 0.5962347384481456, "brier": 0.12506740698999427, "vs_fide": 0.009838744437751623}}, "gap_scale": 0.865151367253993, "white": 32.23369404162731, "age_12_13": 61.69512944977337}, {"season": 2017, "games": 147203, "models": {"FIDE as published": {"log_loss": 0.5855099215784402, "brier": 0.1203767038600523, "vs_fide": 0.0}, "FIDE + white advantage": {"log_loss": 0.5821097792155319, "brier": 0.1189514970682655, "vs_fide": -0.0034001423629082734}, "FIDE + white + gap scale": {"log_loss": 0.5787412824015339, "brier": 0.11778179382422604, "vs_fide": -0.0067686391769063055}, "FIDE + white + age": {"log_loss": 0.5770802119359122, "brier": 0.11720790890939312, "vs_fide": -0.008429709642527896}, "FIDE + white + recent form": {"log_loss": 0.5793586227402084, "brier": 0.11804976662598622, "vs_fide": -0.006151298838231683}, "FIDE + white + gap + age + form": {"log_loss": 0.5746105564304689, "brier": 0.11629516528802071, "vs_fide": -0.01089936514797123}, "Elo rebuilt on this data": {"log_loss": 0.5986975556936178, "brier": 0.12514301786654408, "vs_fide": 0.01318763411517769}, "Glicko-2 rebuilt on this data": {"log_loss": 0.5991686821790863, "brier": 0.12505158457315796, "vs_fide": 0.013658760600646136}}, "gap_scale": 0.8374169185974967, "white": 33.025439386583926, "age_12_13": 74.20131525787345}, {"season": 2018, "games": 157365, "models": {"FIDE as published": {"log_loss": 0.5918563728928986, "brier": 0.1229354926644607, "vs_fide": 0.0}, "FIDE + white advantage": {"log_loss": 0.5886761693016251, "brier": 0.12161681972894624, "vs_fide": -0.0031802035912734936}, "FIDE + white + gap scale": {"log_loss": 0.584070385599124, "brier": 0.12010384225861731, "vs_fide": -0.007785987293774543}, "FIDE + white + age": {"log_loss": 0.5831952092338227, "brier": 0.11968589995860536, "vs_fide": -0.00866116365907594}, "FIDE + white + recent form": {"log_loss": 0.5850460201274655, "brier": 0.12039839733982619, "vs_fide": -0.006810352765433084}, "FIDE + white + gap + age + form": {"log_loss": 0.5796294930303584, "brier": 0.1184284389413807, "vs_fide": -0.012226879862540263}, "Elo rebuilt on this data": {"log_loss": 0.6068782125135342, "brier": 0.1283049844329171, "vs_fide": 0.015021839620635608}, "Glicko-2 rebuilt on this data": {"log_loss": 0.6072483960650319, "brier": 0.1281729451320574, "vs_fide": 0.015392023172133269}}, "gap_scale": 0.8313348356209097, "white": 33.5020095935875, "age_12_13": 77.38939987968078}, {"season": 2019, "games": 72769, "models": {"FIDE as published": {"log_loss": 0.6028959234382226, "brier": 0.1243670815633924, "vs_fide": 0.0}, "FIDE + white advantage": {"log_loss": 0.5994885666852728, "brier": 0.1229170183242112, "vs_fide": -0.0034073567529497805}, "FIDE + white + gap scale": {"log_loss": 0.5936650557026772, "brier": 0.12110135658265181, "vs_fide": -0.009230867735545479}, "FIDE + white + age": {"log_loss": 0.5931240577986093, "brier": 0.12081072430617065, "vs_fide": -0.00977186563961331}, "FIDE + white + recent form": {"log_loss": 0.5956479200100949, "brier": 0.12174354028072201, "vs_fide": -0.007248003428127751}, "FIDE + white + gap + age + form": {"log_loss": 0.5890181087771862, "brier": 0.11941431531369162, "vs_fide": -0.013877814661036433}, "Elo rebuilt on this data": {"log_loss": 0.6198657215242893, "brier": 0.13036720309488098, "vs_fide": 0.016969798086066665}, "Glicko-2 rebuilt on this data": {"log_loss": 0.621843416956298, "brier": 0.13056240108231104, "vs_fide": 0.018947493518075325}}, "gap_scale": 0.8034693038207779, "white": 32.45375769337243, "age_12_13": 89.04441875440274}, {"season": 2020, "games": 61696, "models": {"FIDE as published": {"log_loss": 0.6125719217927763, "brier": 0.1281410033800897, "vs_fide": 0.0}, "FIDE + white advantage": {"log_loss": 0.6093664708302717, "brier": 0.12677998973724902, "vs_fide": -0.003205450962504573}, "FIDE + white + gap scale": {"log_loss": 0.6013881219325168, "brier": 0.12428476277511051, "vs_fide": -0.011183799860259521}, "FIDE + white + age": {"log_loss": 0.6003889276315356, "brier": 0.12373525751920919, "vs_fide": -0.012182994161240737}, "FIDE + white + recent form": {"log_loss": 0.6042868091219424, "brier": 0.1251461087274028, "vs_fide": -0.00828511267083384}, "FIDE + white + gap + age + form": {"log_loss": 0.5954943246835702, "brier": 0.12200153109381148, "vs_fide": -0.017077597109206092}, "Elo rebuilt on this data": {"log_loss": 0.6367851638660543, "brier": 0.13672003855777706, "vs_fide": 0.024213242073277977}, "Glicko-2 rebuilt on this data": {"log_loss": 0.6404533994600196, "brier": 0.13707965834049848, "vs_fide": 0.027881477667243273}}, "gap_scale": 0.7771258584227209, "white": 33.29938747824071, "age_12_13": 101.27831339330922}, {"season": 2021, "games": 110708, "models": {"FIDE as published": {"log_loss": 0.6119954065071155, "brier": 0.12633996795587069, "vs_fide": 0.0}, "FIDE + white advantage": {"log_loss": 0.6083850226642153, "brier": 0.1248201130076031, "vs_fide": -0.003610383842900159}, "FIDE + white + gap scale": {"log_loss": 0.6004239809591837, "brier": 0.12224639506885998, "vs_fide": -0.011571425547931872}, "FIDE + white + age": {"log_loss": 0.5999277590394104, "brier": 0.1219944365038726, "vs_fide": -0.012067647467705092}, "FIDE + white + recent form": {"log_loss": 0.6022071250976562, "brier": 0.12273086017088684, "vs_fide": -0.00978828140945939}, "FIDE + white + gap + age + form": {"log_loss": 0.5940263693023218, "brier": 0.11981319882828524, "vs_fide": -0.017969037204793724}, "Elo rebuilt on this data": {"log_loss": 0.6372451226069347, "brier": 0.1352037464619754, "vs_fide": 0.025249716099819106}, "Glicko-2 rebuilt on this data": {"log_loss": 0.6391890517406558, "brier": 0.13487090542586724, "vs_fide": 0.027193645233540252}}, "gap_scale": 0.7402484588575557, "white": 32.240295039351665, "age_12_13": 109.37682057141157}, {"season": 2022, "games": 134665, "models": {"FIDE as published": {"log_loss": 0.6141722974404309, "brier": 0.1274886336476178, "vs_fide": 0.0}, "FIDE + white advantage": {"log_loss": 0.6108002356445859, "brier": 0.1260481857908556, "vs_fide": -0.0033720617958450366}, "FIDE + white + gap scale": {"log_loss": 0.5994942538679907, "brier": 0.12258960490839874, "vs_fide": -0.014678043572440177}, "FIDE + white + age": {"log_loss": 0.6005995897772848, "brier": 0.12269395509900517, "vs_fide": -0.013572707663146107}, "FIDE + white + recent form": {"log_loss": 0.6031233344095949, "brier": 0.12357566090419568, "vs_fide": -0.011048963030835983}, "FIDE + white + gap + age + form": {"log_loss": 0.5927079114485906, "brier": 0.1200072449783855, "vs_fide": -0.021464385991840314}, "Elo rebuilt on this data": {"log_loss": 0.6425030856859066, "brier": 0.13740459202151079, "vs_fide": 0.028330788245475767}, "Glicko-2 rebuilt on this data": {"log_loss": 0.6435320987730146, "brier": 0.13642126428528212, "vs_fide": 0.02935980133258381}}, "gap_scale": 0.7433556110303823, "white": 34.31989999350691, "age_12_13": 97.58953335859832}, {"season": 2023, "games": 147576, "models": {"FIDE as published": {"log_loss": 0.6069673051697054, "brier": 0.1259387363671917, "vs_fide": 0.0}, "FIDE + white advantage": {"log_loss": 0.6033505618677749, "brier": 0.12441853910054175, "vs_fide": -0.0036167433019305235}, "FIDE + white + gap scale": {"log_loss": 0.5976471022897011, "brier": 0.12250961191604967, "vs_fide": -0.009320202880004375}, "FIDE + white + age": {"log_loss": 0.5968458126524654, "brier": 0.12215527318721428, "vs_fide": -0.010121492517240085}, "FIDE + white + recent form": {"log_loss": 0.5970669143445491, "brier": 0.12223862116182804, "vs_fide": -0.009900390825156416}, "FIDE + white + gap + age + form": {"log_loss": 0.5916762031373498, "brier": 0.12019993694397363, "vs_fide": -0.015291102032355631}, "Elo rebuilt on this data": {"log_loss": 0.6437090085036978, "brier": 0.13889992714855703, "vs_fide": 0.03674170333399235}, "Glicko-2 rebuilt on this data": {"log_loss": 0.643402188625523, "brier": 0.1377323815297366, "vs_fide": 0.036434883455817545}}, "gap_scale": 0.7078450979791124, "white": 33.63720066610513, "age_12_13": 110.3203037374519}, {"season": 2024, "games": 149726, "models": {"FIDE as published": {"log_loss": 0.6053796330033772, "brier": 0.12451344347605839, "vs_fide": 0.0}, "FIDE + white advantage": {"log_loss": 0.6016864676288549, "brier": 0.12292485778183986, "vs_fide": -0.0036931653745222188}, "FIDE + white + gap scale": {"log_loss": 0.5987150336090165, "brier": 0.12173195517688877, "vs_fide": -0.006664599394360629}, "FIDE + white + age": {"log_loss": 0.5981547660029097, "brier": 0.12159268909308675, "vs_fide": -0.0072248670004674016}, "FIDE + white + recent form": {"log_loss": 0.5979988367967073, "brier": 0.1215200046392262, "vs_fide": -0.00738079620666982}, "FIDE + white + gap + age + form": {"log_loss": 0.5946452670516484, "brier": 0.12015469027968753, "vs_fide": -0.010734365951728733}, "Elo rebuilt on this data": {"log_loss": 0.6487923541572922, "brier": 0.1401262921414134, "vs_fide": 0.043412721153915035}, "Glicko-2 rebuilt on this data": {"log_loss": 0.6475928894242314, "brier": 0.13895609000301337, "vs_fide": 0.04221325642085435}}, "gap_scale": 0.77035048575401, "white": 34.23198101046067, "age_12_13": 78.86800141396334}, {"season": 2025, "games": 141723, "models": {"FIDE as published": {"log_loss": 0.6008748896365851, "brier": 0.12347729339235278, "vs_fide": 0.0}, "FIDE + white advantage": {"log_loss": 0.5972880674706399, "brier": 0.12194941668742386, "vs_fide": -0.0035868221659452397}, "FIDE + white + gap scale": {"log_loss": 0.5949778657156634, "brier": 0.12100271476069355, "vs_fide": -0.005897023920921746}, "FIDE + white + age": {"log_loss": 0.5940446844087277, "brier": 0.12070597589943871, "vs_fide": -0.006830205227857443}, "FIDE + white + recent form": {"log_loss": 0.5944225442271419, "brier": 0.12088727068066053, "vs_fide": -0.006452345409443184}, "FIDE + white + gap + age + form": {"log_loss": 0.5914593762552446, "brier": 0.11965066292738138, "vs_fide": -0.009415513381340578}, "Elo rebuilt on this data": {"log_loss": 0.6421447895539715, "brier": 0.1385773770273701, "vs_fide": 0.04126989991738633}, "Glicko-2 rebuilt on this data": {"log_loss": 0.6399462910722828, "brier": 0.13751501623994145, "vs_fide": 0.03907140143569769}}, "gap_scale": 0.8223440427005066, "white": 34.023290783949975, "age_12_13": 50.68232215028212}], "pooled": {"FIDE as published": {"log_loss": 0.5990041748873366, "brier": 0.12382896443824193, "vs_fide": 0.0, "ci_low": 0.0, "ci_high": 0.0, "seasons_better": 0}, "FIDE + white advantage": {"log_loss": 0.595577246769731, "brier": 0.12238529540785692, "vs_fide": -0.003426928119587835, "ci_low": -0.0035374348531392514, "ci_high": -0.0033172916204688265, "seasons_better": 11}, "FIDE + white + gap scale": {"log_loss": 0.5906671821208883, "brier": 0.12074343869566231, "vs_fide": -0.008336992767661125, "ci_low": -0.008725302915767398, "ci_high": -0.00796336730992481, "seasons_better": 11}, "FIDE + white + age": {"log_loss": 0.5899077700672326, "brier": 0.12042057171418732, "vs_fide": -0.009096404821440873, "ci_low": -0.00940792322566236, "ci_high": -0.008797357652653916, "seasons_better": 11}, "FIDE + white + recent form": {"log_loss": 0.591365740306339, "brier": 0.12095411811721679, "vs_fide": -0.007638434582263877, "ci_low": -0.007888714157485667, "ci_high": -0.007401350011150295, "seasons_better": 11}, "FIDE + white + gap + age + form": {"log_loss": 0.5859147207880965, "brier": 0.11895041307110596, "vs_fide": -0.01308945410047371, "ci_low": -0.013560791068346057, "ci_high": -0.012653279945200267, "seasons_better": 11}, "Elo rebuilt on this data": {"log_loss": 0.6232095355522861, "brier": 0.13248427100657742, "vs_fide": 0.024205360665694193, "ci_low": 0.023439430031986622, "ci_high": 0.025030483099329183, "seasons_better": 0}, "Glicko-2 rebuilt on this data": {"log_loss": 0.623331315060376, "brier": 0.1319726052770141, "vs_fide": 0.02432714017183194, "ci_low": 0.02353094189155984, "ci_high": 0.025191892727584098, "seasons_better": 0}}, "test_games": 1390547}};
+const S = {"divisor": 490, "divisor_by_season": {"2015": 470, "2016": 460, "2017": 480, "2018": 480, "2019": 500, "2020": 510, "2021": 540, "2022": 540, "2023": 570, "2024": 520, "2025": 490}, "uncertainty_growth": 10.0, "test_seasons": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025], "inactivity_residuals": [{"age": "under 21", "gap": "active (0-2 months)", "player_games": 754081, "score_vs_expected_pct": 3.0884643773822673}, {"age": "under 21", "gap": "3-5 months", "player_games": 148119, "score_vs_expected_pct": 3.584006241370843}, {"age": "under 21", "gap": "6-11 months", "player_games": 46872, "score_vs_expected_pct": 3.9308799728340724}, {"age": "under 21", "gap": "1-2 years", "player_games": 16121, "score_vs_expected_pct": 4.044382473403824}, {"age": "under 21", "gap": "2-4 years", "player_games": 3354, "score_vs_expected_pct": 4.57454903942322}, {"age": "under 21", "gap": "4+ years", "player_games": 1019, "score_vs_expected_pct": 3.436548687213099}, {"age": "21-49", "gap": "active (0-2 months)", "player_games": 915805, "score_vs_expected_pct": -0.4487615291781849}, {"age": "21-49", "gap": "3-5 months", "player_games": 241883, "score_vs_expected_pct": -1.0419014630164176}, {"age": "21-49", "gap": "6-11 months", "player_games": 110838, "score_vs_expected_pct": -1.8570643634713884}, {"age": "21-49", "gap": "1-2 years", "player_games": 49327, "score_vs_expected_pct": -3.0676390896465078}, {"age": "21-49", "gap": "2-4 years", "player_games": 17582, "score_vs_expected_pct": -3.795475872454948}, {"age": "21-49", "gap": "4+ years", "player_games": 9384, "score_vs_expected_pct": -7.954053437795874}, {"age": "50 and over", "gap": "active (0-2 months)", "player_games": 261914, "score_vs_expected_pct": -3.2036795461198215}, {"age": "50 and over", "gap": "3-5 months", "player_games": 92371, "score_vs_expected_pct": -4.308452084494606}, {"age": "50 and over", "gap": "6-11 months", "player_games": 50279, "score_vs_expected_pct": -5.751522266698116}, {"age": "50 and over", "gap": "1-2 years", "player_games": 23365, "score_vs_expected_pct": -7.634330076000714}, {"age": "50 and over", "gap": "2-4 years", "player_games": 8190, "score_vs_expected_pct": -9.156743872266857}, {"age": "50 and over", "gap": "4+ years", "player_games": 5827, "score_vs_expected_pct": -16.655026762676663}], "inactivity_offsets": [{"age": "under 21", "gap": "3-5 months", "elo_points": 33.037347008779726, "player_games": 148119}, {"age": "under 21", "gap": "6-11 months", "elo_points": 39.45428069672618, "player_games": 46872}, {"age": "under 21", "gap": "1-2 years", "elo_points": 39.213042662510325, "player_games": 16121}, {"age": "under 21", "gap": "2-4 years", "elo_points": 45.39853289566532, "player_games": 3354}, {"age": "under 21", "gap": "4+ years", "elo_points": 34.98000723937844, "player_games": 1019}, {"age": "21-49", "gap": "3-5 months", "elo_points": -16.234121444375845, "player_games": 241883}, {"age": "21-49", "gap": "6-11 months", "elo_points": -27.22053004975636, "player_games": 110838}, {"age": "21-49", "gap": "1-2 years", "elo_points": -41.843376986824886, "player_games": 49327}, {"age": "21-49", "gap": "2-4 years", "elo_points": -50.21832837676724, "player_games": 17582}, {"age": "21-49", "gap": "4+ years", "elo_points": -89.94254294022244, "player_games": 9384}, {"age": "50 and over", "gap": "3-5 months", "elo_points": -55.06852759309024, "player_games": 92371}, {"age": "50 and over", "gap": "6-11 months", "elo_points": -71.25773224700428, "player_games": 50279}, {"age": "50 and over", "gap": "1-2 years", "elo_points": -91.60597792681827, "player_games": 23365}, {"age": "50 and over", "gap": "2-4 years", "elo_points": -111.04527358897107, "player_games": 8190}, {"age": "50 and over", "gap": "4+ years", "elo_points": -173.67007606386525, "player_games": 5827}], "white_advantage": 33.413353933204746, "simulation": [{"system": "FIDE rules (control)", "log_loss": 0.5990041748873366, "brier": 0.12382896443824193, "vs_control": 0.0, "ci_low": 0.0, "ci_high": 0.0, "returns_adjusted": 0, "seasons_better": 0}, {"system": "Stretched table", "log_loss": 0.59358258658473, "brier": 0.12214679769717535, "vs_control": -0.005421588303399785, "ci_low": -0.005723272052034685, "ci_high": -0.005132618234363136, "returns_adjusted": 0, "seasons_better": 11}, {"system": "K-factor by age", "log_loss": 0.5995089045813415, "brier": 0.12398774506746538, "vs_control": 0.0005047296939217902, "ci_low": 0.000417479286564674, "ci_high": 0.0005869600476351961, "returns_adjusted": 0, "seasons_better": 0}, {"system": "Inactivity adjustment", "log_loss": 0.5976401911391005, "brier": 0.1233547618521799, "vs_control": -0.0013639837483991738, "ci_low": -0.0015457874317539025, "ci_high": -0.0011836696847558866, "returns_adjusted": 29446, "seasons_better": 11}, {"system": "Uncertainty K-factor", "log_loss": 0.603880019372656, "brier": 0.12573639126672248, "vs_control": 0.00487584448506986, "ci_low": 0.004657233225208281, "ci_high": 0.005101693016681606, "returns_adjusted": 0, "seasons_better": 0}, {"system": "Table + inactivity adjustment", "log_loss": 0.5925163682970815, "brier": 0.121751055030582, "vs_control": -0.006487806591066332, "ci_low": -0.0068789873256815135, "ci_high": -0.006121950767092628, "returns_adjusted": 29446, "seasons_better": 11}, {"system": "Table + inactivity + uncertainty K", "log_loss": 0.5966164970403945, "brier": 0.12343565474362982, "vs_control": -0.002387677847825902, "ci_low": -0.0028301327873035196, "ci_high": -0.0019555056361407392, "returns_adjusted": 29446, "seasons_better": 9}], "simulation_by_season": {"2015": {"FIDE rules (control)": {"log_loss": 0.5823417392540986, "brier": 0.1201070015675621, "vs_control": 0.0}, "Stretched table": {"log_loss": 0.579356774866479, "brier": 0.11911996878317407, "vs_control": -0.0029849643876197016}, "K-factor by age": {"log_loss": 0.5826786484337241, "brier": 0.12023367829802811, "vs_control": 0.00033690917962543533}, "Inactivity adjustment": {"log_loss": 0.5822644846670103, "brier": 0.12007079200724914, "vs_control": -7.72545870883828e-05}, "Uncertainty K-factor": {"log_loss": 0.5826003325021963, "brier": 0.1201950422998578, "vs_control": 0.00025859324809769966}, "Table + inactivity adjustment": {"log_loss": 0.5791934463965198, "brier": 0.1190579366087307, "vs_control": -0.0031482928575788834}, "Table + inactivity + uncertainty K": {"log_loss": 0.5794185800637282, "brier": 0.1191400397417329, "vs_control": -0.002923159190370508}}, "2016": {"FIDE rules (control)": {"log_loss": 0.586395994010394, "brier": 0.12156082511820583, "vs_control": 0.0}, "Stretched table": {"log_loss": 0.5830019657320001, "brier": 0.12048722199155322, "vs_control": -0.0033940282783937984}, "K-factor by age": {"log_loss": 0.5866665582293524, "brier": 0.12165510044737017, "vs_control": 0.0002705642189584166}, "Inactivity adjustment": {"log_loss": 0.5858440795217412, "brier": 0.12136346935114856, "vs_control": -0.0005519144886527827}, "Uncertainty K-factor": {"log_loss": 0.5874742979023273, "brier": 0.12196817824512178, "vs_control": 0.0010783038919332788}, "Table + inactivity adjustment": {"log_loss": 0.5824921301196392, "brier": 0.12029997026748253, "vs_control": -0.0039038638907547924}, "Table + inactivity + uncertainty K": {"log_loss": 0.5834537811335015, "brier": 0.12067840217989542, "vs_control": -0.0029422128768924545}}, "2017": {"FIDE rules (control)": {"log_loss": 0.5855099215784402, "brier": 0.1203767038600523, "vs_control": 0.0}, "Stretched table": {"log_loss": 0.581276757846326, "brier": 0.11903283804558523, "vs_control": -0.004233163732114045}, "K-factor by age": {"log_loss": 0.5859604824472978, "brier": 0.12054954142256824, "vs_control": 0.0004505608688576502}, "Inactivity adjustment": {"log_loss": 0.5847307183014719, "brier": 0.1200794120851936, "vs_control": -0.0007792032769681779}, "Uncertainty K-factor": {"log_loss": 0.5880809646553957, "brier": 0.12132654684801975, "vs_control": 0.0025710430769556114}, "Table + inactivity adjustment": {"log_loss": 0.5805074985424304, "brier": 0.11874247277582489, "vs_control": -0.005002423036009656}, "Table + inactivity + uncertainty K": {"log_loss": 0.5825376988158899, "brier": 0.11954094674687643, "vs_control": -0.0029722227625502105}}, "2018": {"FIDE rules (control)": {"log_loss": 0.5918563728928986, "brier": 0.1229354926644607, "vs_control": 0.0}, "Stretched table": {"log_loss": 0.5868203600010721, "brier": 0.12138426468623228, "vs_control": -0.005036012891826619}, "K-factor by age": {"log_loss": 0.5923924599736033, "brier": 0.12311653935203264, "vs_control": 0.0005360870807046894}, "Inactivity adjustment": {"log_loss": 0.5907602455899167, "brier": 0.12255105282183877, "vs_control": -0.0010961273029819953}, "Uncertainty K-factor": {"log_loss": 0.5960686242469604, "brier": 0.12449628393256083, "vs_control": 0.004212251354061741}, "Table + inactivity adjustment": {"log_loss": 0.5858072066498122, "brier": 0.12101551850557585, "vs_control": -0.006049166243086376}, "Table + inactivity + uncertainty K": {"log_loss": 0.5894213335373062, "brier": 0.12242393403563873, "vs_control": -0.0024350393555924404}}, "2019": {"FIDE rules (control)": {"log_loss": 0.6028959234382226, "brier": 0.1243670815633924, "vs_control": 0.0}, "Stretched table": {"log_loss": 0.596564810904989, "brier": 0.12244430283695071, "vs_control": -0.006331112533233605}, "K-factor by age": {"log_loss": 0.6035034932205361, "brier": 0.12460003412575407, "vs_control": 0.0006075697823134174}, "Inactivity adjustment": {"log_loss": 0.6020293737977374, "brier": 0.12409072340415295, "vs_control": -0.0008665496404853147}, "Uncertainty K-factor": {"log_loss": 0.6078663096813024, "brier": 0.12626109856789025, "vs_control": 0.004970386243079723}, "Table + inactivity adjustment": {"log_loss": 0.5956677627028527, "brier": 0.12214143334077791, "vs_control": -0.007228160735369943}, "Table + inactivity + uncertainty K": {"log_loss": 0.5996881644121448, "brier": 0.12376485537423912, "vs_control": -0.003207759026077835}}, "2020": {"FIDE rules (control)": {"log_loss": 0.6125719217927763, "brier": 0.1281410033800897, "vs_control": 0.0}, "Stretched table": {"log_loss": 0.6049057843004966, "brier": 0.12581175025025032, "vs_control": -0.007666137492279703}, "K-factor by age": {"log_loss": 0.6130333424310217, "brier": 0.12827714553747896, "vs_control": 0.0004614206382454363}, "Inactivity adjustment": {"log_loss": 0.610109454140776, "brier": 0.12729720970337774, "vs_control": -0.0024624676520003546}, "Uncertainty K-factor": {"log_loss": 0.6184985476841677, "brier": 0.13045079651808245, "vs_control": 0.005926625891391403}, "Table + inactivity adjustment": {"log_loss": 0.6026493759183329, "brier": 0.12499110498157935, "vs_control": -0.00992254587444339}, "Table + inactivity + uncertainty K": {"log_loss": 0.6069172837750448, "brier": 0.12675095490400026, "vs_control": -0.005654638017731448}}, "2021": {"FIDE rules (control)": {"log_loss": 0.6119954065071155, "brier": 0.12633996795587069, "vs_control": 0.0}, "Stretched table": {"log_loss": 0.6033102567743284, "brier": 0.12369300592848002, "vs_control": -0.008685149732787216}, "K-factor by age": {"log_loss": 0.6120869953081663, "brier": 0.1263007037550493, "vs_control": 9.158880105083012e-05}, "Inactivity adjustment": {"log_loss": 0.6095520881674384, "brier": 0.1255173743273739, "vs_control": -0.002443318339677105}, "Uncertainty K-factor": {"log_loss": 0.6181624140996873, "brier": 0.12871537824400262, "vs_control": 0.006167007592571762}, "Table + inactivity adjustment": {"log_loss": 0.6012551907697264, "brier": 0.12293931124420973, "vs_control": -0.01074021573738909}, "Table + inactivity + uncertainty K": {"log_loss": 0.6054170333297322, "brier": 0.12465622100026925, "vs_control": -0.00657837317738331}}, "2022": {"FIDE rules (control)": {"log_loss": 0.6141722974404309, "brier": 0.1274886336476178, "vs_control": 0.0}, "Stretched table": {"log_loss": 0.6029790377931981, "brier": 0.1241413742021412, "vs_control": -0.011193259647232792}, "K-factor by age": {"log_loss": 0.6145536335024462, "brier": 0.12758249592297063, "vs_control": 0.0003813360620153315}, "Inactivity adjustment": {"log_loss": 0.6105502230983766, "brier": 0.12630079424310808, "vs_control": -0.0036220743420542923}, "Uncertainty K-factor": {"log_loss": 0.619805148989514, "brier": 0.1297084878790797, "vs_control": 0.005632851549083159}, "Table + inactivity adjustment": {"log_loss": 0.6002608183402673, "brier": 0.12317111811051032, "vs_control": -0.013911479100163588}, "Table + inactivity + uncertainty K": {"log_loss": 0.6047814520208423, "brier": 0.12503036380824975, "vs_control": -0.009390845419588605}}, "2023": {"FIDE rules (control)": {"log_loss": 0.6069673051697054, "brier": 0.1259387363671917, "vs_control": 0.0}, "Stretched table": {"log_loss": 0.5998120353774867, "brier": 0.12375179395179615, "vs_control": -0.007155269792218796}, "K-factor by age": {"log_loss": 0.6074630674108553, "brier": 0.126068933302796, "vs_control": 0.0004957622411498467}, "Inactivity adjustment": {"log_loss": 0.6045391193437631, "brier": 0.12509412947326576, "vs_control": -0.002428185825942367}, "Uncertainty K-factor": {"log_loss": 0.6150133812862185, "brier": 0.1291177570911448, "vs_control": 0.008046076116513057}, "Table + inactivity adjustment": {"log_loss": 0.598217442626624, "brier": 0.1231416474582722, "vs_control": -0.008749862543081428}, "Table + inactivity + uncertainty K": {"log_loss": 0.6044702401972833, "brier": 0.12578708258010943, "vs_control": -0.0024970649724221122}}, "2024": {"FIDE rules (control)": {"log_loss": 0.6053796330033772, "brier": 0.12451344347605839, "vs_control": 0.0}, "Stretched table": {"log_loss": 0.6020598643533644, "brier": 0.12338580042257957, "vs_control": -0.00331976865001272}, "K-factor by age": {"log_loss": 0.6062989652753743, "brier": 0.12480747716002737, "vs_control": 0.0009193322719971977}, "Inactivity adjustment": {"log_loss": 0.604531907271219, "brier": 0.12416499147540357, "vs_control": -0.0008477257321581805}, "Uncertainty K-factor": {"log_loss": 0.6129926799587111, "brier": 0.12758349092925175, "vs_control": 0.007613046955334001}, "Table + inactivity adjustment": {"log_loss": 0.6016588291950428, "brier": 0.12319865440263815, "vs_control": -0.003720803808334402}, "Table + inactivity + uncertainty K": {"log_loss": 0.6087944528681607, "brier": 0.12617775752028648, "vs_control": 0.0034148198647835954}}, "2025": {"FIDE rules (control)": {"log_loss": 0.6008748896365851, "brier": 0.12347729339235278, "vs_control": 0.0}, "Stretched table": {"log_loss": 0.5986637594224146, "brier": 0.12275431475689064, "vs_control": -0.002211130214170591}, "K-factor by age": {"log_loss": 0.6017600744967448, "brier": 0.12376421152958679, "vs_control": 0.0008851848601596974}, "Inactivity adjustment": {"log_loss": 0.6004227870855282, "brier": 0.12331530143219323, "vs_control": -0.00045210255105688704}, "Uncertainty K-factor": {"log_loss": 0.6083496474471773, "brier": 0.1264957050035307, "vs_control": 0.007474757810592186}, "Table + inactivity adjustment": {"log_loss": 0.5984906683530206, "brier": 0.12267921670986563, "vs_control": -0.002384221283564626}, "Table + inactivity + uncertainty K": {"log_loss": 0.6059299955888516, "brier": 0.12575864771339884, "vs_control": 0.005055105952266449}}}, "rating_shift_by_age": [{"system": "Stretched table", "under 21": -6.055865063744094, "21-49": -0.46881270957378224, "50 and over": -1.080370909516141}, {"system": "K-factor by age", "under 21": 1.593887500577528, "21-49": 1.5472860426101371, "50 and over": 0.4474117570304492}, {"system": "Inactivity adjustment", "under 21": -1.7531249219337435, "21-49": -19.913661063156248, "50 and over": -36.63675023498578}, {"system": "Uncertainty K-factor", "under 21": -9.603184730396473, "21-49": -7.84099365711074, "50 and over": -5.687101884650698}, {"system": "Table + inactivity adjustment", "under 21": -7.401747282453629, "21-49": -20.270771237717398, "50 and over": -38.06427863190465}, {"system": "Table + inactivity + uncertainty K", "under 21": -14.63520344608437, "21-49": -25.62034885143549, "50 and over": -41.130920347414616}], "top_2700": [{"id": "1503014", "rating": 2823, "flag": "", "classical_games_last_12_months": 18, "months_since_last_game": 3, "name": "Carlsen, Magnus", "age": 36, "return_adjustment": 0.0}, {"id": "4100018", "rating": 2812, "flag": "i", "classical_games_last_12_months": 0, "months_since_last_game": null, "name": "Kasparov, Garry", "age": 63, "return_adjustment": -173.67007606386525}, {"id": "2016192", "rating": 2792, "flag": "", "classical_games_last_12_months": 36, "months_since_last_game": 5, "name": "Nakamura, Hikaru", "age": 39, "return_adjustment": 0.0}, {"id": "2020009", "rating": 2789, "flag": "", "classical_games_last_12_months": 67, "months_since_last_game": 1, "name": "Caruana, Fabiano", "age": 34, "return_adjustment": 0.0}, {"id": "14205483", "rating": 2778, "flag": "", "classical_games_last_12_months": 72, "months_since_last_game": 1, "name": "Sindarov, Javokhir", "age": 21, "return_adjustment": 0.0}, {"id": "5202213", "rating": 2774, "flag": "", "classical_games_last_12_months": 52, "months_since_last_game": 1, "name": "So, Wesley", "age": 33, "return_adjustment": 0.0}, {"id": "12940690", "rating": 2764, "flag": "", "classical_games_last_12_months": 89, "months_since_last_game": 1, "name": "Keymer, Vincent", "age": 22, "return_adjustment": 0.0}, {"id": "14204118", "rating": 2762, "flag": "", "classical_games_last_12_months": 69, "months_since_last_game": 2, "name": "Abdusattorov, Nodirbek", "age": 22, "return_adjustment": 0.0}, {"id": "25059530", "rating": 2761, "flag": "", "classical_games_last_12_months": 89, "months_since_last_game": 1, "name": "Praggnanandhaa R", "age": 21, "return_adjustment": 0.0}, {"id": "35009192", "rating": 2759, "flag": "", "classical_games_last_12_months": 68, "months_since_last_game": 2, "name": "Erigaisi Arjun", "age": 23, "return_adjustment": 0.0}, {"id": "12573981", "rating": 2757, "flag": "", "classical_games_last_12_months": 42, "months_since_last_game": 2, "name": "Firouzja, Alireza", "age": 23, "return_adjustment": 0.0}, {"id": "24116068", "rating": 2757, "flag": "", "classical_games_last_12_months": 74, "months_since_last_game": 1, "name": "Giri, Anish", "age": 32, "return_adjustment": 0.0}, {"id": "4101588", "rating": 2753, "flag": "i", "classical_games_last_12_months": 0, "months_since_last_game": 92, "name": "Kramnik, Vladimir", "age": 51, "return_adjustment": -173.67007606386525}, {"id": "8603405", "rating": 2752, "flag": "", "classical_games_last_12_months": 43, "months_since_last_game": 2, "name": "Wei, Yi", "age": 27, "return_adjustment": 0.0}, {"id": "14109603", "rating": 2750, "flag": "i", "classical_games_last_12_months": 0, "months_since_last_game": 40, "name": "Karjakin, Sergey", "age": 36, "return_adjustment": -50.21832837676724}, {"id": "1170546", "rating": 2743, "flag": "", "classical_games_last_12_months": 10, "months_since_last_game": 3, "name": "Duda, Jan-Krzysztof", "age": 28, "return_adjustment": 0.0}, {"id": "5000017", "rating": 2739, "flag": "", "classical_games_last_12_months": 3, "months_since_last_game": 5, "name": "Anand, Viswanathan", "age": 57, "return_adjustment": 0.0}, {"id": "12521213", "rating": 2737, "flag": "", "classical_games_last_12_months": 72, "months_since_last_game": 1, "name": "Tabatabaei, M. Amin", "age": 25, "return_adjustment": 0.0}, {"id": "8603677", "rating": 2733, "flag": "", "classical_games_last_12_months": 10, "months_since_last_game": 2, "name": "Ding, Liren", "age": 34, "return_adjustment": 0.0}, {"id": "3503240", "rating": 2732, "flag": "", "classical_games_last_12_months": 2, "months_since_last_game": 6, "name": "Dominguez Perez, Leinier", "age": 43, "return_adjustment": 0.0}, {"id": "12401137", "rating": 2732, "flag": "", "classical_games_last_12_months": 16, "months_since_last_game": 2, "name": "Le, Quang Liem", "age": 35, "return_adjustment": 0.0}, {"id": "738590", "rating": 2726, "flag": "", "classical_games_last_12_months": 49, "months_since_last_game": 1, "name": "Rapport, Richard", "age": 30, "return_adjustment": 0.0}, {"id": "13300474", "rating": 2725, "flag": "", "classical_games_last_12_months": 55, "months_since_last_game": 1, "name": "Aronian, Levon", "age": 44, "return_adjustment": 0.0}, {"id": "2093596", "rating": 2725, "flag": "", "classical_games_last_12_months": 82, "months_since_last_game": 2, "name": "Niemann, Hans Moke", "age": 23, "return_adjustment": 0.0}, {"id": "13401319", "rating": 2720, "flag": "", "classical_games_last_12_months": 70, "months_since_last_game": 1, "name": "Mamedyarov, Shakhriyar", "age": 41, "return_adjustment": 0.0}, {"id": "4168119", "rating": 2719, "flag": "", "classical_games_last_12_months": 57, "months_since_last_game": 2, "name": "Nepomniachtchi, Ian", "age": 36, "return_adjustment": 0.0}, {"id": "25092340", "rating": 2718, "flag": "", "classical_games_last_12_months": 64, "months_since_last_game": 2, "name": "Nihal Sarin", "age": 22, "return_adjustment": 0.0}, {"id": "623539", "rating": 2718, "flag": "", "classical_games_last_12_months": 60, "months_since_last_game": 1, "name": "Vachier-Lagrave, Maxime", "age": 36, "return_adjustment": 0.0}, {"id": "44599790", "rating": 2716, "flag": "", "classical_games_last_12_months": 67, "months_since_last_game": 1, "name": "Erdogmus, Yagiz Kaan", "age": 15, "return_adjustment": 0.0}, {"id": "4158814", "rating": 2714, "flag": "", "classical_games_last_12_months": 20, "months_since_last_game": 1, "name": "Andreikin, Dmitry", "age": 36, "return_adjustment": 0.0}, {"id": "8603820", "rating": 2710, "flag": "", "classical_games_last_12_months": 54, "months_since_last_game": 2, "name": "Yu, Yangyi", "age": 32, "return_adjustment": 0.0}, {"id": "2040506", "rating": 2708, "flag": "", "classical_games_last_12_months": 52, "months_since_last_game": 1, "name": "Sevian, Samuel", "age": 26, "return_adjustment": 0.0}, {"id": "1039784", "rating": 2706, "flag": "", "classical_games_last_12_months": 106, "months_since_last_game": 1, "name": "Van Foreest, Jorden", "age": 27, "return_adjustment": 0.0}, {"id": "12539929", "rating": 2705, "flag": "", "classical_games_last_12_months": 68, "months_since_last_game": 2, "name": "Maghsoodloo, Parham", "age": 26, "return_adjustment": 0.0}, {"id": "46616543", "rating": 2703, "flag": "", "classical_games_last_12_months": 59, "months_since_last_game": 2, "name": "Gukesh D", "age": 20, "return_adjustment": 0.0}], "nakamura_lists": [{"list": "2024-01", "rating": 2788, "games": 0}, {"list": "2024-02", "rating": 2788, "games": 0}, {"list": "2024-03", "rating": 2789, "games": 3}, {"list": "2024-04", "rating": 2789, "games": 0}, {"list": "2024-05", "rating": 2794, "games": 14}, {"list": "2024-06", "rating": 2794, "games": 0}, {"list": "2024-07", "rating": 2802, "games": 10}, {"list": "2024-08", "rating": 2802, "games": 0}, {"list": "2024-09", "rating": 2802, "games": 0}, {"list": "2024-10", "rating": 2802, "games": 0}, {"list": "2024-11", "rating": 2802, "games": 0}, {"list": "2024-12", "rating": 2802, "games": 0}, {"list": "2025-01", "rating": 2802, "games": 0}, {"list": "2025-02", "rating": 2802, "games": 0}, {"list": "2025-03", "rating": 2802, "games": 0}, {"list": "2025-04", "rating": 2804, "games": 8}, {"list": "2025-05", "rating": 2804, "games": 0}, {"list": "2025-06", "rating": 2804, "games": 0}, {"list": "2025-07", "rating": 2807, "games": 10}, {"list": "2025-08", "rating": 2807, "games": 0}, {"list": "2025-09", "rating": 2807, "games": 0}, {"list": "2025-10", "rating": 2816, "games": 11}, {"list": "2025-11", "rating": 2813, "games": 6}, {"list": "2025-12", "rating": 2810, "games": 5}, {"list": "2026-01", "rating": 2810, "games": 0}, {"list": "2026-02", "rating": 2810, "games": 0}, {"list": "2026-03", "rating": 2810, "games": 0}, {"list": "2026-04", "rating": 2810, "games": 0}, {"list": "2026-05", "rating": 2792, "games": 14}, {"list": "2026-06", "rating": 2792, "games": 0}, {"list": "2026-07", "rating": 2792, "games": 0}, {"list": "2026-08", "rating": 2792, "games": 0}, {"list": "2026-09", "rating": 2792, "games": 0}], "games_by_season": {"2014": 119831, "2015": 127503, "2016": 139613, "2017": 147203, "2018": 157365, "2019": 72769, "2020": 61696, "2021": 110708, "2022": 134665, "2023": 147576, "2024": 149726, "2025": 141723}};
+const $ = (id) => document.getElementById(id);
+const fmt = (n) => n.toLocaleString("en-US");
+const pct = (x, d = 1) => (100 * x).toFixed(d) + "%";
+const MINUS = "−";
+const signed = (v, d = 0) => (Number(v.toFixed(d)) > 0 ? "+" : Number(v.toFixed(d)) < 0 ? MINUS : "") + Math.abs(v).toFixed(d);
+const m = Object.fromEntries(D.models.map((r) => [r.model, r]));
+const base = m["FIDE as published"], full = m["FIDE + white + gap + age + form"];
+const brierGain = 1 - full.brier / base.brier;
+const E = D.fitted_elo_points, C = D.composition, G = D.gap_scale_model;
+const allGames = D.train_games + D.test_games;
+const W = D.walk_forward, WP = W.pooled, WS = W.seasons;
+const wfGain = 1 - WP["FIDE + white + gap + age + form"].brier / WP["FIDE as published"].brier;
+const meanScale = WS.reduce((a, r) => a + r.gap_scale, 0) / WS.length;
+const seasonLabel = (s) => `${s}-${String((s + 1) % 100).padStart(2, "0")}`;
+const nTest = WS.length;
+const allGamesWF = Object.values(S.games_by_season).reduce((a, b) => a + b, 0);
+const sim = Object.fromEntries(S.simulation.map((r) => [r.system, r]));
+const ctrl = sim["FIDE rules (control)"], best = sim["Table + inactivity adjustment"];
+const simGain = 1 - best.brier / ctrl.brier;
+const off = (age, gap) => S.inactivity_offsets.find((o) => o.age === age && o.gap === gap).elo_points;
+const res = (age, gap) => S.inactivity_residuals.find((o) => o.age === age && o.gap === gap);
+
+$("dek").textContent = `A study of ${fmt(allGamesWF)} classical games over twelve seasons finds five ways the FIDE rating list mispredicts results, including a clear case for rating decay among adults. Two rule changes, replayed month by month, beat FIDE's current rules in every one of ${nTest} test seasons.`;
+
+const figs = [
+  [Math.round((1 - meanScale) * 100) + "%", "too wide: how much FIDE's table overstates rating gaps, average of 11 seasons"],
+  [signed(off("50 and over", "4+ years")), "Elo points for a player over 50 returning after four or more years"],
+  [`${sim["Table + inactivity adjustment"].seasons_better} of ${nTest}`, "test seasons in which two proposed rule changes beat FIDE's current rules"],
+  [pct(wfGain), "less prediction error with all corrections combined, pooled over 11 seasons"],
+];
+$("figures").innerHTML = figs.map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join("");
+
+$("data-copy").innerHTML = `<p><strong>${fmt(allGamesWF)}</strong> rated classical games from <strong>${fmt(C.events)}</strong> events between October 2014 and September 2026, taken from The Week in Chess, with <strong>${fmt(C.players)}</strong> players. Each game carries both players' FIDE IDs and their published standard ratings at the time.</p>
+<p>TWIC tags every game with the player's classical rating, even in rapid, blitz or Chess960 events, so each event was checked in two ways. Classical events have at most two rounds a day, and their games show up in the players' classical game counts in FIDE's next monthly lists. Events that failed either check were removed. Birth years and monthly game counts come from 169 FIDE standard lists, September 2012 to September 2026.</p>
+<p>In the latest season, ratings run from ${C.p10_rating} (10th percentile) to ${C.p90_rating} (90th), with a median of ${C.median_rating}. ${pct(C.draw_rate)} of games were drawn, and White scored ${pct(C.white_score)}.</p>`;
+
+const cs = D.calibration_stronger;
+const at200 = cs.find((r) => r.gap_from === 200), far = cs.find((r) => r.gap_from === 400);
+$("f1-copy").innerHTML = `<p>Across every gap from 50 to 399 points, the higher-rated player scored less than FIDE's table expects. At a 200 to 249 point gap the table expects <strong>${pct(at200.fide)}</strong>, and favourites actually scored <strong>${pct(at200.actual)}</strong>.</p>
+<p>The best fit shrinks every rating difference by a factor of <strong>${G["gap scale"].toFixed(2)}</strong>, so a 200-point gap behaves like a ${Math.round(200 * G["gap scale"])}-point gap. That is the same as building the table on about ${Math.round(400 / G["gap scale"] / 10) * 10} points instead of 400. Across the eleven seasons the fitted factor ranged from ${Math.min(...WS.map((r) => r.gap_scale)).toFixed(2)} to ${Math.max(...WS.map((r) => r.gap_scale)).toFixed(2)}, always well below 1. It is also why lower-rated players in this sample outperform their ratings as a group.</p>
+<p>One exception sits at the far end. FIDE counts a gap above 400 as exactly 400 for players rated below 2650, and favourites in those games scored ${pct(far.actual)} against the table's ${pct(far.fide)}.</p>`;
+$("calib-cap").textContent = `Higher-rated player's average score by rating gap, test year, ${fmt(cs.reduce((a, r) => a + r.games, 0))} games. The corrected model includes the gap scale and the white advantage.`;
+
+$("f2-copy").innerHTML = `<p>Players aged 12 to 17 scored about 2 to 3 percentage points more than their ratings predicted, and players over 50 scored about 4 points less. Converted to rating points, a 12 to 13 year old plays about <strong>${Math.round(E["12-13"])} points</strong> above their FIDE rating and a player over 65 about <strong>${Math.abs(Math.round(E["65+"]))} points</strong> below.</p>
+<p>The effect is still visible for players aged 18 to 20 (+${Math.round(E["18-20"])}), who have already left FIDE's K=40 bracket for under-18 players. Every point a junior is underrated is a point taken from the adults they play, which is one route by which ratings drift.</p>
+<p>The size of the gap changes over time. Fitted season by season, the 12 to 13 year old gap peaked at about ${Math.max(...WS.map((r) => r.age_12_13)).toFixed(0)} points in the seasons after the pandemic, when many juniors had kept improving while their classical ratings stood still.</p>`;
+
+const r21a = res("21-49", "active (0-2 months)"), r21b = res("21-49", "2-4 years");
+const r50a = res("50 and over", "active (0-2 months)"), r50b = res("50 and over", "4+ years");
+$("f5-copy").innerHTML = `<p>FIDE ratings do not move while a player is away. A player who stops for three years comes back with the same number. The monthly lists record how many rated classical games each player had every month, so every game in the sample can be tagged with how long that player had been away.</p>
+<p>Active adults aged 21 to 49 scored ${signed(r21a.score_vs_expected_pct, 1)} points per 100 games against FIDE's expectation. The same age group coming back after two to four years scored ${signed(r21b.score_vs_expected_pct, 1)}. Active players over 50 scored ${signed(r50a.score_vs_expected_pct, 1)}, and those back after four or more years scored <strong>${signed(r50b.score_vs_expected_pct, 1)}</strong>. The longer the break and the older the player, the more the rating overstates them.</p>
+<p>Juniors show the opposite. They keep improving while they are away, so a returning junior is underrated, not overrated. A flat decay for everyone would make the junior problem worse.</p>`;
+$("decay-cap").textContent = `Score against FIDE expectation, in points per 100 games, by time since the player's last rated classical game. All eleven test seasons pooled. Groups with fewer than 150 player-games are not drawn.`;
+
+const naka = S.nakamura_lists;
+const nakaTop = S.top_2700.find((t) => t.id === "2016192");
+const freeze = naka.filter((n) => n.list >= "2024-08" && n.list <= "2025-03");
+const cand = naka.find((n) => n.list === "2026-05"), before = naka.find((n) => n.list === "2026-04");
+$("naka-copy").innerHTML = `<p>The data does not support Nakamura as the example. He has never gone a year without a rated classical game, which is FIDE's line for inactivity. He had <strong>${nakaTop.classical_games_last_12_months}</strong> rated classical games across the last 12 lists, and his rating moved when he played: it fell from ${before.rating} to ${cand.rating} after the 2026 Candidates.</p>
+<p>What the lists do show is a player who plays in bursts. His rating stayed at ${freeze[0].rating} across ${freeze.length} consecutive lists, August 2024 to March 2025, with no rated classical games in any of them. That is a weaker complaint than decay: a rating that is current but updated rarely.</p>`;
+
+const inact = S.top_2700.filter((t) => t.flag === "i" || t.id === "2016192");
+$("naka-copy2").innerHTML = `<p>The clearer cases sit elsewhere on the same list. ${inact.filter((t) => t.flag === "i").length} of the ${S.top_2700.length} players rated 2700 or above on the September 2026 list are flagged inactive. FIDE leaves inactive players off its ranking lists, but their ratings stay where they were. The last column shows what the fitted return adjustment from this study would do if they came back.</p>`;
+$("inactive").innerHTML = `<thead><tr><th>Player</th><th class="n">Rating</th><th class="n">Age</th><th class="n">Games, last 12 lists</th><th class="n">Months since last game</th><th class="n">Return adjustment</th></tr></thead><tbody>` +
+  inact.map((t) => {
+    const nm = t.name.includes(",") ? t.name.split(",").reverse().join(" ").trim() : t.name;
+    const since = t.months_since_last_game == null ? "70+" : t.months_since_last_game;
+    const adj = t.return_adjustment ? signed(t.return_adjustment) : "none";
+    return `<tr><td>${nm}<span class="note">${t.flag === "i" ? "flagged inactive" : "active"}</span></td><td class="n">${t.rating}</td><td class="n">${t.age ?? ""}</td><td class="n">${t.classical_games_last_12_months}</td><td class="n">${since}</td><td class="n ${t.return_adjustment < 0 ? "neg" : ""}">${adj}</td></tr>`;
+  }).join("") + "</tbody>";
+
+const fc = D.form_coefficients["FIDE + white + recent form"];
+$("f3-copy").innerHTML = `<p>A player who has recently scored above their expectation tends to keep doing so. The model keeps a running, fading average of each player's recent results minus FIDE's prediction, using only games from earlier days. A player running a tenth of a point per game above expectation plays about <strong>${Math.round(fc * 0.1)} points</strong> above their rating in the next games.</p>
+<p>That is what a rating update that is too slow looks like. On its own this correction cut log loss by ${Math.abs(m["FIDE + white + recent form"].vs_fide_log_loss).toFixed(4)}, close to the age correction, and much of it overlaps with age, since the players improving fastest are mostly young.</p>`;
+
+$("f4-h").textContent = `The white pieces are worth about ${Math.round(E["white advantage"])} points`;
+$("f4-copy").innerHTML = `<p>White scored ${pct(C.white_score)} in the test year. As a rating difference, the first move is worth about <strong>${Math.round(E["white advantage"])} Elo points</strong>. FIDE ignores colour in its expectation, which is reasonable for the rating list because colours even out over an event. For predicting a single game it is the easiest correction available.</p>`;
+
+$("test-n").textContent = fmt(W.test_games);
+$("median").textContent = C.median_rating;
+const rows = [
+  ["FIDE as published", "Official ratings, FIDE table with the 400-point rule"],
+  ["FIDE + white advantage", "Adds a fixed bonus for White"],
+  ["FIDE + white + gap scale", "Also shrinks the rating gap"],
+  ["FIDE + white + age", "Also adds an offset per age group"],
+  ["FIDE + white + recent form", "Also adds each player's recent overperformance"],
+  ["FIDE + white + gap + age + form", "All corrections together"],
+  ["Elo rebuilt on this data", "FIDE's update rule run only on these games"],
+  ["Glicko-2 rebuilt on this data", "Glicko-2 run only on these games"],
+];
+const f5 = (x) => x.toFixed(5), sign4 = (x) => (x > 0 ? "+" : x < 0 ? MINUS : "") + Math.abs(x).toFixed(4);
+const ci = (r) => `${sign4(r.vs_fide_log_loss ?? r.vs_control)} <span style="color:var(--muted);font-weight:400">[${sign4(r.ci_low)}, ${sign4(r.ci_high)}]</span>`;
+const ciW = (r) => `${sign4(r.vs_fide)} <span style="color:var(--muted);font-weight:400">[${sign4(r.ci_low)}, ${sign4(r.ci_high)}]</span>`;
+$("models").innerHTML = `<thead><tr><th>Model</th><th class="n">Log loss</th><th class="n">Brier</th><th class="n">Change vs FIDE</th><th class="n">Better in</th></tr></thead><tbody>` +
+  rows.map(([k, note]) => {
+    const r = WP[k], cls = k === "FIDE as published" ? "base" : k === "FIDE + white + gap + age + form" ? "best" : r.vs_fide > 0 ? "worse" : "";
+    return `<tr class="${cls}"><td>${k}<span class="note">${note}</span></td><td class="n">${f5(r.log_loss)}</td><td class="n">${f5(r.brier)}</td><td class="n">${k === "FIDE as published" ? "baseline" : ciW(r)}</td><td class="n">${k === "FIDE as published" ? "" : `${r.seasons_better} of ${nTest}`}</td></tr>`;
+  }).join("") + "</tbody>";
+
+const glWins = WS.filter((r) => r.models["Glicko-2 rebuilt on this data"].log_loss < r.models["Elo rebuilt on this data"].log_loss).length;
+$("glicko-copy").innerHTML = `<p>The last two rows answer a different question. Both were rebuilt from scratch using only the games in this sample, seeded with each player's first published rating, so both do far worse than the official list, which sees every rated game in the world. Compared with each other on identical data, <strong>neither was consistently better</strong>: Glicko-2 beat FIDE's Elo rule in ${glWins} of ${nTest} seasons. An earlier version of this study, based on one season, reported a clear Glicko-2 win. The longer test does not support it.</p>`;
+
+const sc = Object.fromEntries(WS.map((r) => [r.season, r]));
+$("season-copy").innerHTML = `<p>Every correction was refitted on each season and tested on the one after it, eleven times. <strong>Each of the four corrections beat the published ratings in all ${nTest} test seasons</strong>, including the thin pandemic seasons. The size of the gains moved with the times: largest in the seasons after the pandemic, when juniors had improved without rated games, and smaller again after FIDE's March 2024 rating adjustment.</p>`;
+$("season-table").innerHTML = `<thead><tr><th>Season</th><th class="n">Games tested</th><th class="n">Less error, all corrections</th><th class="n">Gap scale fitted</th><th class="n">12 to 13 year olds fitted</th></tr></thead><tbody>` +
+  [...Array(nTest + 1).keys()].map((i) => {
+    const s = WS[0].season - 1 + i, test = sc[s], next = sc[s + 1];
+    const gain = test ? pct(1 - test.models["FIDE + white + gap + age + form"].brier / test.models["FIDE as published"].brier) : "warm-up";
+    return `<tr><td>${seasonLabel(s)}</td><td class="n">${test ? fmt(test.games) : ""}</td><td class="n">${gain}</td><td class="n">${next ? next.gap_scale.toFixed(2) : ""}</td><td class="n">${next ? signed(next.age_12_13) : ""}</td></tr>`;
+  }).join("") + "</tbody>";
+
+const divs = Object.values(S.divisor_by_season);
+const simRows = [
+  ["FIDE rules (control)", "Current regulations"],
+  ["Stretched table", `Conversion table stretched from 400 points to between ${Math.min(...divs)} and ${Math.max(...divs)}, refitted each season, with the 400-point rule stretched to match`],
+  ["K-factor by age", "K=40 for every player under 18, at least 30 for ages 18 to 20"],
+  ["Inactivity adjustment", "One adjustment when a player returns after a year or more, by age and length of break"],
+  ["Uncertainty K-factor", "K follows how uncertain each rating is: it grows during a break and shrinks with games, between FIDE's 10 and 40"],
+  ["Table + inactivity adjustment", "Stretched table and inactivity adjustment"],
+  ["Table + inactivity + uncertainty K", "All three"],
+];
+$("sim").innerHTML = `<thead><tr><th>Rule set</th><th class="n">Log loss</th><th class="n">Brier</th><th class="n">Change vs current rules</th><th class="n">Better in</th></tr></thead><tbody>` +
+  simRows.map(([k, note]) => {
+    const r = sim[k], cls = k === "FIDE rules (control)" ? "base" : k === "Table + inactivity adjustment" ? "best" : r.vs_control > 0 ? "worse" : "";
+    return `<tr class="${cls}"><td>${k}<span class="note">${note}</span></td><td class="n">${f5(r.log_loss)}</td><td class="n">${f5(r.brier)}</td><td class="n">${k === "FIDE rules (control)" ? "baseline" : ci(r)}</td><td class="n">${k === "FIDE rules (control)" ? "" : `${r.seasons_better} of ${nTest}`}</td></tr>`;
+  }).join("") + "</tbody>";
+const shift = Object.fromEntries(S.rating_shift_by_age.map((r) => [r.system, r]));
+const ia = sim["Inactivity adjustment"];
+$("sim-copy").innerHTML = `<p><strong>Two rules helped in every season and two did not help in any.</strong> The stretched table and the inactivity adjustment each beat the current rules in all ${nTest} test seasons, and together they cut prediction error by ${pct(simGain)}. The inactivity adjustment fired ${fmt(ia.returns_adjusted)} times over the eleven seasons. By the end it had moved the average player over 50 by ${signed(shift["Inactivity adjustment"]["50 and over"], 1)} points and the average player aged 21 to 49 by ${signed(shift["Inactivity adjustment"]["21-49"], 1)}.</p>
+<p>Both changes to the K-factor made predictions <strong>worse in every season</strong>. A bigger K for juniors mostly amplifies the noise in their results instead of tracking their improvement. The uncertainty K-factor, which raises K after a break so a returning player's rating moves faster, did the same and also diluted the gain from the other two rules. Returning players are better served by a one-time adjustment than by a faster-moving rating.</p>`;
+
+const proposals = [
+  ["yes", `Better in ${sim["Stretched table"].seasons_better} of ${nTest} seasons`, "Recalibrate the conversion table.", `A table built on roughly ${Math.round(400 / meanScale / 10) * 10} points instead of 400, with the 400-point rule stretched to match, predicted better than the current table in every season when replayed month by month. The best width varied between seasons, so FIDE could review it periodically.`],
+  ["yes", `Better in ${sim["Inactivity adjustment"].seasons_better} of ${nTest} seasons`, "Adjust ratings for inactivity, by age.", `Apply one adjustment when a player returns from a break of a year or more: downward for adults, larger for older players and longer breaks, and upward for juniors. Fitted over all seasons: ages 21 to 49, ${signed(off("21-49", "1-2 years"))} after one to two years, ${signed(off("21-49", "2-4 years"))} after two to four and ${signed(off("21-49", "4+ years"))} after four or more; 50 and over, ${signed(off("50 and over", "1-2 years"))}, ${signed(off("50 and over", "2-4 years"))} and ${signed(off("50 and over", "4+ years"))}; under 21, about ${signed(off("under 21", "1-2 years"))}.`],
+  ["no", `Worse in all ${nTest} seasons`, "Raise the K-factor for juniors.", "The underrating of juniors is real, but a larger K made predictions worse. Juniors need a different fix, such as an update that expects improvement by age."],
+  ["no", `Worse in all ${nTest} seasons`, "Set K from rating uncertainty.", "A K-factor that rises after a break and falls with games, the core idea behind Glicko, also made predictions worse. A one-time return adjustment handles inactivity better."],
+  ["open", "No change needed", "Leave colour out of rating changes.", "The white advantage is real, about 33 points in every season, but colours balance over a tournament. It matters for single-game predictions more than for the rating list."],
+];
+$("proposals").innerHTML = proposals.map(([cls, st, b, t]) => `<li><div><span class="status ${cls}">${st}</span><b>${b}</b>${t}</div></li>`).join("");
+
+// ---------- charts ----------
+const NS = "http://www.w3.org/2000/svg";
+function el(parent, tag, attrs, text) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (text != null) e.textContent = text;
+  parent.appendChild(e);
+  return e;
+}
+
+(function calib() {
+  const svg = $("calib"), W = 720, H = 360, L = 56, R = 20, T = 16, B = 44;
+  const x = (g) => L + (g / 400) * (W - L - R);
+  const y = (v) => T + (1 - (v - 0.5) / 0.45) * (H - T - B);
+  const grid = el(svg, "g", { class: "grid" }), ax = el(svg, "g", { class: "axis" });
+  for (let v = 0.5; v <= 0.951; v += 0.1) {
+    el(grid, "line", { x1: L, x2: W - R, y1: y(v), y2: y(v) });
+    el(ax, "text", { x: L - 10, y: y(v) + 4, "text-anchor": "end" }, Math.round(v * 100) + "%");
+  }
+  cs.forEach((r) => el(ax, "text", { x: x(r.gap_from), y: H - B + 20, "text-anchor": "middle" }, r.gap_from === 400 ? "400+" : r.gap_from));
+  el(ax, "text", { x: (L + W - R) / 2, y: H - 6, "text-anchor": "middle" }, "Rating gap, points (bins of 50)");
+  const line = (key, color, dash) => el(svg, "polyline", {
+    points: cs.map((r) => `${x(r.gap_from)},${y(r[key])}`).join(" "),
+    fill: "none", stroke: color, "stroke-width": 2.2, "stroke-dasharray": dash || "none", "stroke-linejoin": "round",
+  });
+  line("fide", "var(--brass)", "6 5");
+  line("gap_model", "var(--board)");
+  cs.forEach((r) => el(svg, "circle", { cx: x(r.gap_from), cy: y(r.actual), r: 4.5, fill: "var(--ink)" }));
+})();
+
+(function ages() {
+  const svg = $("ages"), W = 720, L = 130, R = 60, T = 10, rowH = 36;
+  const order = ["11 and under", "12-13", "14-15", "16-17", "18-20", "21-49", "50-64", "65+"];
+  const lab = { "11 and under": "11 and under", "12-13": "12 to 13", "14-15": "14 to 15", "16-17": "16 to 17", "18-20": "18 to 20", "21-49": "21 to 49", "50-64": "50 to 64", "65+": "65 and over" };
+  const lim = 80, cx = L + (W - L - R) / 2, sx = (v) => cx + (v / lim) * ((W - L - R) / 2);
+  const grid = el(svg, "g", { class: "grid" }), ax = el(svg, "g", { class: "axis" });
+  const bottom = T + order.length * rowH;
+  [-80, -40, 0, 40, 80].forEach((v) => {
+    el(grid, "line", { x1: sx(v), x2: sx(v), y1: T, y2: bottom });
+    el(ax, "text", { x: sx(v), y: bottom + 20, "text-anchor": "middle" }, signed(v));
+  });
+  order.forEach((k, i) => {
+    const v = k === "21-49" ? 0 : E[k], yy = T + i * rowH;
+    el(svg, "text", { x: 0, y: yy + rowH / 2 + 5, fill: "var(--ink)", "font-size": 14, "font-family": "var(--sans)" }, lab[k]);
+    if (k === "21-49") {
+      el(svg, "text", { x: sx(0) + 10, y: yy + rowH / 2 + 4, class: "lbl" }, "reference group");
+    } else {
+      const x0 = Math.min(sx(0), sx(v)), w = Math.abs(sx(v) - sx(0));
+      el(svg, "rect", { x: x0, y: yy + 8, width: w, height: rowH - 16, fill: v >= 0 ? "var(--board)" : "var(--clay)" });
+      el(svg, "text", { x: v >= 0 ? sx(v) + 8 : sx(v) - 8, y: yy + rowH / 2 + 4, "text-anchor": v >= 0 ? "start" : "end", class: "lbl", style: "fill:var(--ink)" }, signed(v));
+    }
+  });
+  el(svg, "line", { x1: sx(0), x2: sx(0), y1: T, y2: bottom, class: "zero" });
+  el(ax, "text", { x: cx, y: bottom + 40, "text-anchor": "middle" }, "Elo points above or below FIDE rating");
+  svg.setAttribute("viewBox", `0 0 ${W} ${bottom + 50}`);
+})();
+
+(function decay() {
+  const svg = $("decay"), W = 720, H = 360, L = 56, R = 160, T = 16, B = 48;
+  const gaps = ["active (0-2 months)", "3-5 months", "6-11 months", "1-2 years", "2-4 years", "4+ years"];
+  const glab = ["Active", "3-5 mo", "6-11 mo", "1-2 yr", "2-4 yr", "4+ yr"];
+  const groups = [["under 21", "var(--board)", "Under 21"], ["21-49", "var(--brass)", "21 to 49"], ["50 and over", "var(--clay)", "50 and over"]];
+  const lo = -22, hi = 6;
+  const x = (i) => L + (i / (gaps.length - 1)) * (W - L - R);
+  const y = (v) => T + ((hi - v) / (hi - lo)) * (H - T - B);
+  const grid = el(svg, "g", { class: "grid" }), ax = el(svg, "g", { class: "axis" });
+  for (let v = -20; v <= 5; v += 5) {
+    el(grid, "line", { x1: L, x2: W - R, y1: y(v), y2: y(v) });
+    el(ax, "text", { x: L - 10, y: y(v) + 4, "text-anchor": "end" }, signed(v));
+  }
+  el(svg, "line", { x1: L, x2: W - R, y1: y(0), y2: y(0), class: "zero" });
+  glab.forEach((g, i) => el(ax, "text", { x: x(i), y: H - B + 20, "text-anchor": "middle" }, g));
+  el(ax, "text", { x: (L + W - R) / 2, y: H - 6, "text-anchor": "middle" }, "Time since last rated classical game");
+  groups.forEach(([age, color, label]) => {
+    const pts = gaps.map((g, i) => [i, res(age, g)]).filter(([, r]) => r && r.player_games >= 150);
+    el(svg, "polyline", { points: pts.map(([i, r]) => `${x(i)},${y(r.score_vs_expected_pct)}`).join(" "), fill: "none", stroke: color, "stroke-width": 2.4, "stroke-linejoin": "round" });
+    pts.forEach(([i, r]) => el(svg, "circle", { cx: x(i), cy: y(r.score_vs_expected_pct), r: 4, fill: color }));
+    const [li, lr] = pts[pts.length - 1];
+    el(svg, "text", { x: x(li) + 10, y: y(lr.score_vs_expected_pct) + 4, class: "lbl", style: `fill:${color}` }, `${label} ${signed(lr.score_vs_expected_pct, 1)}`);
+  });
+})();
+
+(function seasonsChart() {
+  const svg = $("seasons"), Wd = 720, H = 340, L = 56, R = 20, T = 16, B = 44;
+  const gain = (r, k) => 100 * (1 - r.models[k].brier / r.models["FIDE as published"].brier);
+  const series = [["FIDE + white + gap + age + form", "var(--ink)", null], ["FIDE + white + age", "var(--board)", null],
+                  ["FIDE + white + gap scale", "var(--brass)", null], ["FIDE + white advantage", "var(--muted)", "6 5"]];
+  const hi = Math.ceil(Math.max(...WS.map((r) => gain(r, series[0][0])))) + 1;
+  const x = (i) => L + (i / (WS.length - 1)) * (Wd - L - R);
+  const y = (v) => T + ((hi - v) / hi) * (H - T - B);
+  const grid = el(svg, "g", { class: "grid" }), ax = el(svg, "g", { class: "axis" });
+  for (let v = 0; v <= hi; v += 1) {
+    el(grid, "line", { x1: L, x2: Wd - R, y1: y(v), y2: y(v) });
+    el(ax, "text", { x: L - 10, y: y(v) + 4, "text-anchor": "end" }, v + "%");
+  }
+  WS.forEach((r, i) => el(ax, "text", { x: x(i), y: H - B + 20, "text-anchor": "middle" }, seasonLabel(r.season).slice(2)));
+  el(ax, "text", { x: (L + Wd - R) / 2, y: H - 6, "text-anchor": "middle" }, "Test season");
+  series.forEach(([k, color, dash]) => {
+    el(svg, "polyline", { points: WS.map((r, i) => `${x(i)},${y(gain(r, k))}`).join(" "), fill: "none", stroke: color, "stroke-width": 2.2, "stroke-dasharray": dash || "none", "stroke-linejoin": "round" });
+    WS.forEach((r, i) => el(svg, "circle", { cx: x(i), cy: y(gain(r, k)), r: 3, fill: color }));
+  });
+})();
+
+(function nakaChart() {
+  const svg = $("naka"), W = 720, H = 380, L = 56, R = 16, T = 16;
+  const top = { y0: T, y1: 230 }, bot = { y0: 262, y1: 340 };
+  const n = naka.length, bw = (W - L - R) / n;
+  const x = (i) => L + i * bw + bw / 2;
+  const rs = naka.map((d) => d.rating), rlo = Math.floor((Math.min(...rs) - 6) / 10) * 10, rhi = Math.ceil((Math.max(...rs) + 6) / 10) * 10;
+  const yr = (v) => top.y0 + ((rhi - v) / (rhi - rlo)) * (top.y1 - top.y0);
+  const gmax = 15, yg = (v) => bot.y1 - (v / gmax) * (bot.y1 - bot.y0);
+  const grid = el(svg, "g", { class: "grid" }), ax = el(svg, "g", { class: "axis" });
+  for (let v = rlo; v <= rhi; v += 10) {
+    el(grid, "line", { x1: L, x2: W - R, y1: yr(v), y2: yr(v) });
+    el(ax, "text", { x: L - 10, y: yr(v) + 4, "text-anchor": "end" }, v);
+  }
+  [0, 15].forEach((v) => {
+    el(grid, "line", { x1: L, x2: W - R, y1: yg(v), y2: yg(v) });
+    el(ax, "text", { x: L - 10, y: yg(v) + 4, "text-anchor": "end" }, v);
+  });
+  el(ax, "text", { x: L, y: bot.y0 - 10 }, "Games");
+  naka.forEach((d, i) => {
+    if (d.games > 0) el(svg, "rect", { x: x(i) - bw * 0.35, y: yg(d.games), width: bw * 0.7, height: yg(0) - yg(d.games), fill: "var(--brass)" });
+    if (d.list.endsWith("-01")) {
+      el(grid, "line", { x1: x(i) - bw / 2, x2: x(i) - bw / 2, y1: top.y0, y2: bot.y1 });
+      el(ax, "text", { x: x(i) - bw / 2 + 4, y: H - 18 }, d.list.slice(0, 4));
+    }
+  });
+  let path = `M ${L} ${yr(naka[0].rating)}`;
+  naka.forEach((d, i) => { path += ` H ${x(i) - bw / 2} V ${yr(d.rating)}`; });
+  path += ` H ${W - R}`;
+  el(svg, "path", { d: path, fill: "none", stroke: "var(--ink)", "stroke-width": 2.2 });
+  const fi = naka.findIndex((d) => d.list === "2024-08"), fj = naka.findIndex((d) => d.list === "2025-03");
+  el(svg, "text", { x: (x(fi) + x(fj)) / 2, y: yr(naka[fi].rating) - 10, "text-anchor": "middle", class: "lbl" }, `${fj - fi + 1} lists, no games`);
+  const ci2 = naka.findIndex((d) => d.list === "2026-05");
+  el(svg, "text", { x: x(ci2) - 6, y: yr(naka[ci2].rating) + 18, "text-anchor": "end", class: "lbl" }, `Candidates ${signed(naka[ci2].rating - naka[ci2 - 1].rating)}`);
+})();
+</script>

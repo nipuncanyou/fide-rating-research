@@ -1,0 +1,84 @@
+games per season: {2014: 119831, 2015: 127503, 2016: 139613, 2017: 147203, 2018: 157365, 2019: 72769, 2020: 61696, 2021: 110708, 2022: 134665, 2023: 147576, 2024: 149726, 2025: 141723}
+season 2015: divisor 470
+season 2016: divisor 460
+season 2017: divisor 480
+season 2018: divisor 480
+season 2019: divisor 500
+season 2020: divisor 510
+season 2021: divisor 540
+season 2022: divisor 540
+season 2023: divisor 570
+season 2024: divisor 520
+season 2025: divisor 490
+  uncertainty growth 0.0: warm-up log loss 0.58519
+  uncertainty growth 5.0: warm-up log loss 0.58517
+  uncertainty growth 10.0: warm-up log loss 0.58513
+  uncertainty growth 20.0: warm-up log loss 0.58513
+  uncertainty growth 40.0: warm-up log loss 0.58623
+  FIDE rules (control)                 +0.00000 [+0.00000, +0.00000] better in 0/11 seasons
+  Stretched table                      -0.00542 [-0.00572, -0.00513] better in 11/11 seasons
+  K-factor by age                      +0.00050 [+0.00042, +0.00059] better in 0/11 seasons
+  Inactivity adjustment                -0.00136 [-0.00155, -0.00118] better in 11/11 seasons
+  Uncertainty K-factor                 +0.00488 [+0.00466, +0.00510] better in 0/11 seasons
+  Table + inactivity adjustment        -0.00649 [-0.00688, -0.00612] better in 11/11 seasons
+  Table + inactivity + uncertainty K   -0.00239 [-0.00283, -0.00196] better in 9/11 seasons
+
+Score vs FIDE expectation by age and time since last rated game (test seasons):
+      under 21 |  active (0-2 months):  +3.09%  (754081)
+      under 21 |           3-5 months:  +3.58%  (148119)
+      under 21 |          6-11 months:  +3.93%  (46872)
+      under 21 |            1-2 years:  +4.04%  (16121)
+      under 21 |            2-4 years:  +4.57%  (3354)
+      under 21 |             4+ years:  +3.44%  (1019)
+         21-49 |  active (0-2 months):  -0.45%  (915805)
+         21-49 |           3-5 months:  -1.04%  (241883)
+         21-49 |          6-11 months:  -1.86%  (110838)
+         21-49 |            1-2 years:  -3.07%  (49327)
+         21-49 |            2-4 years:  -3.80%  (17582)
+         21-49 |             4+ years:  -7.95%  (9384)
+   50 and over |  active (0-2 months):  -3.20%  (261914)
+   50 and over |           3-5 months:  -4.31%  (92371)
+   50 and over |          6-11 months:  -5.75%  (50279)
+   50 and over |            1-2 years:  -7.63%  (23365)
+   50 and over |            2-4 years:  -9.16%  (8190)
+   50 and over |             4+ years: -16.66%  (5827)
+
+Offsets on return, Elo points (all seasons):
+      under 21 |   3-5 months:  +33.0  (n=148119)
+      under 21 |  6-11 months:  +39.5  (n=46872)
+      under 21 |    1-2 years:  +39.2  (n=16121)
+      under 21 |    2-4 years:  +45.4  (n=3354)
+      under 21 |     4+ years:  +35.0  (n=1019)
+         21-49 |   3-5 months:  -16.2  (n=241883)
+         21-49 |  6-11 months:  -27.2  (n=110838)
+         21-49 |    1-2 years:  -41.8  (n=49327)
+         21-49 |    2-4 years:  -50.2  (n=17582)
+         21-49 |     4+ years:  -89.9  (n=9384)
+   50 and over |   3-5 months:  -55.1  (n=92371)
+   50 and over |  6-11 months:  -71.3  (n=50279)
+   50 and over |    1-2 years:  -91.6  (n=23365)
+   50 and over |    2-4 years: -111.0  (n=8190)
+   50 and over |     4+ years: -173.7  (n=5827)
+
+Simulation over 11 test seasons (uncertainty growth 10.0):
+  FIDE rules (control)                 ll 0.59900 brier 0.12383 +0.00000 [+0.00000, +0.00000] better 0/11 returns 0
+  Stretched table                      ll 0.59358 brier 0.12215 -0.00542 [-0.00572, -0.00513] better 11/11 returns 0
+  K-factor by age                      ll 0.59951 brier 0.12399 +0.00050 [+0.00042, +0.00059] better 0/11 returns 0
+  Inactivity adjustment                ll 0.59764 brier 0.12335 -0.00136 [-0.00155, -0.00118] better 11/11 returns 29446
+  Uncertainty K-factor                 ll 0.60388 brier 0.12574 +0.00488 [+0.00466, +0.00510] better 0/11 returns 0
+  Table + inactivity adjustment        ll 0.59252 brier 0.12175 -0.00649 [-0.00688, -0.00612] better 11/11 returns 29446
+  Table + inactivity + uncertainty K   ll 0.59662 brier 0.12344 -0.00239 [-0.00283, -0.00196] better 9/11 returns 29446
+
+Mean rating change by the end, by age group:
+   {'system': 'Stretched table', 'under 21': -6.1, '21-49': -0.5, '50 and over': -1.1}
+   {'system': 'K-factor by age', 'under 21': 1.6, '21-49': 1.5, '50 and over': 0.4}
+   {'system': 'Inactivity adjustment', 'under 21': -1.8, '21-49': -19.9, '50 and over': -36.6}
+   {'system': 'Uncertainty K-factor', 'under 21': -9.6, '21-49': -7.8, '50 and over': -5.7}
+   {'system': 'Table + inactivity adjustment', 'under 21': -7.4, '21-49': -20.3, '50 and over': -38.1}
+   {'system': 'Table + inactivity + uncertainty K', 'under 21': -14.6, '21-49': -25.6, '50 and over': -41.1}
+
+Inactive 2700+ players, September 2026 list:
+  Kasparov, Garry              2812 flag=i games(12m)=0 since=None age=63 adj=-174
+  Nakamura, Hikaru             2792 flag=- games(12m)=36 since=5 age=39 adj=+0
+  Kramnik, Vladimir            2753 flag=i games(12m)=0 since=92 age=51 adj=-174
+  Karjakin, Sergey             2750 flag=i games(12m)=0 since=40 age=36 adj=-50

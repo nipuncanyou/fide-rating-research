@@ -1,0 +1,1285 @@
+{
+  "divisor": 490,
+  "divisor_by_season": {
+    "2015": 470,
+    "2016": 460,
+    "2017": 480,
+    "2018": 480,
+    "2019": 500,
+    "2020": 510,
+    "2021": 540,
+    "2022": 540,
+    "2023": 570,
+    "2024": 520,
+    "2025": 490
+  },
+  "uncertainty_growth": 10.0,
+  "test_seasons": [
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "inactivity_residuals": [
+    {
+      "age": "under 21",
+      "gap": "active (0-2 months)",
+      "player_games": 754081,
+      "score_vs_expected_pct": 3.0884643773822673
+    },
+    {
+      "age": "under 21",
+      "gap": "3-5 months",
+      "player_games": 148119,
+      "score_vs_expected_pct": 3.584006241370843
+    },
+    {
+      "age": "under 21",
+      "gap": "6-11 months",
+      "player_games": 46872,
+      "score_vs_expected_pct": 3.9308799728340724
+    },
+    {
+      "age": "under 21",
+      "gap": "1-2 years",
+      "player_games": 16121,
+      "score_vs_expected_pct": 4.044382473403824
+    },
+    {
+      "age": "under 21",
+      "gap": "2-4 years",
+      "player_games": 3354,
+      "score_vs_expected_pct": 4.57454903942322
+    },
+    {
+      "age": "under 21",
+      "gap": "4+ years",
+      "player_games": 1019,
+      "score_vs_expected_pct": 3.436548687213099
+    },
+    {
+      "age": "21-49",
+      "gap": "active (0-2 months)",
+      "player_games": 915805,
+      "score_vs_expected_pct": -0.4487615291781849
+    },
+    {
+      "age": "21-49",
+      "gap": "3-5 months",
+      "player_games": 241883,
+      "score_vs_expected_pct": -1.0419014630164176
+    },
+    {
+      "age": "21-49",
+      "gap": "6-11 months",
+      "player_games": 110838,
+      "score_vs_expected_pct": -1.8570643634713884
+    },
+    {
+      "age": "21-49",
+      "gap": "1-2 years",
+      "player_games": 49327,
+      "score_vs_expected_pct": -3.0676390896465078
+    },
+    {
+      "age": "21-49",
+      "gap": "2-4 years",
+      "player_games": 17582,
+      "score_vs_expected_pct": -3.795475872454948
+    },
+    {
+      "age": "21-49",
+      "gap": "4+ years",
+      "player_games": 9384,
+      "score_vs_expected_pct": -7.954053437795874
+    },
+    {
+      "age": "50 and over",
+      "gap": "active (0-2 months)",
+      "player_games": 261914,
+      "score_vs_expected_pct": -3.2036795461198215
+    },
+    {
+      "age": "50 and over",
+      "gap": "3-5 months",
+      "player_games": 92371,
+      "score_vs_expected_pct": -4.308452084494606
+    },
+    {
+      "age": "50 and over",
+      "gap": "6-11 months",
+      "player_games": 50279,
+      "score_vs_expected_pct": -5.751522266698116
+    },
+    {
+      "age": "50 and over",
+      "gap": "1-2 years",
+      "player_games": 23365,
+      "score_vs_expected_pct": -7.634330076000714
+    },
+    {
+      "age": "50 and over",
+      "gap": "2-4 years",
+      "player_games": 8190,
+      "score_vs_expected_pct": -9.156743872266857
+    },
+    {
+      "age": "50 and over",
+      "gap": "4+ years",
+      "player_games": 5827,
+      "score_vs_expected_pct": -16.655026762676663
+    }
+  ],
+  "inactivity_offsets": [
+    {
+      "age": "under 21",
+      "gap": "3-5 months",
+      "elo_points": 33.037347008779726,
+      "player_games": 148119
+    },
+    {
+      "age": "under 21",
+      "gap": "6-11 months",
+      "elo_points": 39.45428069672618,
+      "player_games": 46872
+    },
+    {
+      "age": "under 21",
+      "gap": "1-2 years",
+      "elo_points": 39.213042662510325,
+      "player_games": 16121
+    },
+    {
+      "age": "under 21",
+      "gap": "2-4 years",
+      "elo_points": 45.39853289566532,
+      "player_games": 3354
+    },
+    {
+      "age": "under 21",
+      "gap": "4+ years",
+      "elo_points": 34.98000723937844,
+      "player_games": 1019
+    },
+    {
+      "age": "21-49",
+      "gap": "3-5 months",
+      "elo_points": -16.234121444375845,
+      "player_games": 241883
+    },
+    {
+      "age": "21-49",
+      "gap": "6-11 months",
+      "elo_points": -27.22053004975636,
+      "player_games": 110838
+    },
+    {
+      "age": "21-49",
+      "gap": "1-2 years",
+      "elo_points": -41.843376986824886,
+      "player_games": 49327
+    },
+    {
+      "age": "21-49",
+      "gap": "2-4 years",
+      "elo_points": -50.21832837676724,
+      "player_games": 17582
+    },
+    {
+      "age": "21-49",
+      "gap": "4+ years",
+      "elo_points": -89.94254294022244,
+      "player_games": 9384
+    },
+    {
+      "age": "50 and over",
+      "gap": "3-5 months",
+      "elo_points": -55.06852759309024,
+      "player_games": 92371
+    },
+    {
+      "age": "50 and over",
+      "gap": "6-11 months",
+      "elo_points": -71.25773224700428,
+      "player_games": 50279
+    },
+    {
+      "age": "50 and over",
+      "gap": "1-2 years",
+      "elo_points": -91.60597792681827,
+      "player_games": 23365
+    },
+    {
+      "age": "50 and over",
+      "gap": "2-4 years",
+      "elo_points": -111.04527358897107,
+      "player_games": 8190
+    },
+    {
+      "age": "50 and over",
+      "gap": "4+ years",
+      "elo_points": -173.67007606386525,
+      "player_games": 5827
+    }
+  ],
+  "white_advantage": 33.413353933204746,
+  "simulation": [
+    {
+      "system": "FIDE rules (control)",
+      "log_loss": 0.5990041748873366,
+      "brier": 0.12382896443824193,
+      "vs_control": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "returns_adjusted": 0,
+      "seasons_better": 0
+    },
+    {
+      "system": "Stretched table",
+      "log_loss": 0.59358258658473,
+      "brier": 0.12214679769717535,
+      "vs_control": -0.005421588303399785,
+      "ci_low": -0.005723272052034685,
+      "ci_high": -0.005132618234363136,
+      "returns_adjusted": 0,
+      "seasons_better": 11
+    },
+    {
+      "system": "K-factor by age",
+      "log_loss": 0.5995089045813415,
+      "brier": 0.12398774506746538,
+      "vs_control": 0.0005047296939217902,
+      "ci_low": 0.000417479286564674,
+      "ci_high": 0.0005869600476351961,
+      "returns_adjusted": 0,
+      "seasons_better": 0
+    },
+    {
+      "system": "Inactivity adjustment",
+      "log_loss": 0.5976401911391005,
+      "brier": 0.1233547618521799,
+      "vs_control": -0.0013639837483991738,
+      "ci_low": -0.0015457874317539025,
+      "ci_high": -0.0011836696847558866,
+      "returns_adjusted": 29446,
+      "seasons_better": 11
+    },
+    {
+      "system": "Uncertainty K-factor",
+      "log_loss": 0.603880019372656,
+      "brier": 0.12573639126672248,
+      "vs_control": 0.00487584448506986,
+      "ci_low": 0.004657233225208281,
+      "ci_high": 0.005101693016681606,
+      "returns_adjusted": 0,
+      "seasons_better": 0
+    },
+    {
+      "system": "Table + inactivity adjustment",
+      "log_loss": 0.5925163682970815,
+      "brier": 0.121751055030582,
+      "vs_control": -0.006487806591066332,
+      "ci_low": -0.0068789873256815135,
+      "ci_high": -0.006121950767092628,
+      "returns_adjusted": 29446,
+      "seasons_better": 11
+    },
+    {
+      "system": "Table + inactivity + uncertainty K",
+      "log_loss": 0.5966164970403945,
+      "brier": 0.12343565474362982,
+      "vs_control": -0.002387677847825902,
+      "ci_low": -0.0028301327873035196,
+      "ci_high": -0.0019555056361407392,
+      "returns_adjusted": 29446,
+      "seasons_better": 9
+    }
+  ],
+  "simulation_by_season": {
+    "2015": {
+      "FIDE rules (control)": {
+        "log_loss": 0.5823417392540986,
+        "brier": 0.1201070015675621,
+        "vs_control": 0.0
+      },
+      "Stretched table": {
+        "log_loss": 0.579356774866479,
+        "brier": 0.11911996878317407,
+        "vs_control": -0.0029849643876197016
+      },
+      "K-factor by age": {
+        "log_loss": 0.5826786484337241,
+        "brier": 0.12023367829802811,
+        "vs_control": 0.00033690917962543533
+      },
+      "Inactivity adjustment": {
+        "log_loss": 0.5822644846670103,
+        "brier": 0.12007079200724914,
+        "vs_control": -7.72545870883828e-05
+      },
+      "Uncertainty K-factor": {
+        "log_loss": 0.5826003325021963,
+        "brier": 0.1201950422998578,
+        "vs_control": 0.00025859324809769966
+      },
+      "Table + inactivity adjustment": {
+        "log_loss": 0.5791934463965198,
+        "brier": 0.1190579366087307,
+        "vs_control": -0.0031482928575788834
+      },
+      "Table + inactivity + uncertainty K": {
+        "log_loss": 0.5794185800637282,
+        "brier": 0.1191400397417329,
+        "vs_control": -0.002923159190370508
+      }
+    },
+    "2016": {
+      "FIDE rules (control)": {
+        "log_loss": 0.586395994010394,
+        "brier": 0.12156082511820583,
+        "vs_control": 0.0
+      },
+      "Stretched table": {
+        "log_loss": 0.5830019657320001,
+        "brier": 0.12048722199155322,
+        "vs_control": -0.0033940282783937984
+      },
+      "K-factor by age": {
+        "log_loss": 0.5866665582293524,
+        "brier": 0.12165510044737017,
+        "vs_control": 0.0002705642189584166
+      },
+      "Inactivity adjustment": {
+        "log_loss": 0.5858440795217412,
+        "brier": 0.12136346935114856,
+        "vs_control": -0.0005519144886527827
+      },
+      "Uncertainty K-factor": {
+        "log_loss": 0.5874742979023273,
+        "brier": 0.12196817824512178,
+        "vs_control": 0.0010783038919332788
+      },
+      "Table + inactivity adjustment": {
+        "log_loss": 0.5824921301196392,
+        "brier": 0.12029997026748253,
+        "vs_control": -0.0039038638907547924
+      },
+      "Table + inactivity + uncertainty K": {
+        "log_loss": 0.5834537811335015,
+        "brier": 0.12067840217989542,
+        "vs_control": -0.0029422128768924545
+      }
+    },
+    "2017": {
+      "FIDE rules (control)": {
+        "log_loss": 0.5855099215784402,
+        "brier": 0.1203767038600523,
+        "vs_control": 0.0
+      },
+      "Stretched table": {
+        "log_loss": 0.581276757846326,
+        "brier": 0.11903283804558523,
+        "vs_control": -0.004233163732114045
+      },
+      "K-factor by age": {
+        "log_loss": 0.5859604824472978,
+        "brier": 0.12054954142256824,
+        "vs_control": 0.0004505608688576502
+      },
+      "Inactivity adjustment": {
+        "log_loss": 0.5847307183014719,
+        "brier": 0.1200794120851936,
+        "vs_control": -0.0007792032769681779
+      },
+      "Uncertainty K-factor": {
+        "log_loss": 0.5880809646553957,
+        "brier": 0.12132654684801975,
+        "vs_control": 0.0025710430769556114
+      },
+      "Table + inactivity adjustment": {
+        "log_loss": 0.5805074985424304,
+        "brier": 0.11874247277582489,
+        "vs_control": -0.005002423036009656
+      },
+      "Table + inactivity + uncertainty K": {
+        "log_loss": 0.5825376988158899,
+        "brier": 0.11954094674687643,
+        "vs_control": -0.0029722227625502105
+      }
+    },
+    "2018": {
+      "FIDE rules (control)": {
+        "log_loss": 0.5918563728928986,
+        "brier": 0.1229354926644607,
+        "vs_control": 0.0
+      },
+      "Stretched table": {
+        "log_loss": 0.5868203600010721,
+        "brier": 0.12138426468623228,
+        "vs_control": -0.005036012891826619
+      },
+      "K-factor by age": {
+        "log_loss": 0.5923924599736033,
+        "brier": 0.12311653935203264,
+        "vs_control": 0.0005360870807046894
+      },
+      "Inactivity adjustment": {
+        "log_loss": 0.5907602455899167,
+        "brier": 0.12255105282183877,
+        "vs_control": -0.0010961273029819953
+      },
+      "Uncertainty K-factor": {
+        "log_loss": 0.5960686242469604,
+        "brier": 0.12449628393256083,
+        "vs_control": 0.004212251354061741
+      },
+      "Table + inactivity adjustment": {
+        "log_loss": 0.5858072066498122,
+        "brier": 0.12101551850557585,
+        "vs_control": -0.006049166243086376
+      },
+      "Table + inactivity + uncertainty K": {
+        "log_loss": 0.5894213335373062,
+        "brier": 0.12242393403563873,
+        "vs_control": -0.0024350393555924404
+      }
+    },
+    "2019": {
+      "FIDE rules (control)": {
+        "log_loss": 0.6028959234382226,
+        "brier": 0.1243670815633924,
+        "vs_control": 0.0
+      },
+      "Stretched table": {
+        "log_loss": 0.596564810904989,
+        "brier": 0.12244430283695071,
+        "vs_control": -0.006331112533233605
+      },
+      "K-factor by age": {
+        "log_loss": 0.6035034932205361,
+        "brier": 0.12460003412575407,
+        "vs_control": 0.0006075697823134174
+      },
+      "Inactivity adjustment": {
+        "log_loss": 0.6020293737977374,
+        "brier": 0.12409072340415295,
+        "vs_control": -0.0008665496404853147
+      },
+      "Uncertainty K-factor": {
+        "log_loss": 0.6078663096813024,
+        "brier": 0.12626109856789025,
+        "vs_control": 0.004970386243079723
+      },
+      "Table + inactivity adjustment": {
+        "log_loss": 0.5956677627028527,
+        "brier": 0.12214143334077791,
+        "vs_control": -0.007228160735369943
+      },
+      "Table + inactivity + uncertainty K": {
+        "log_loss": 0.5996881644121448,
+        "brier": 0.12376485537423912,
+        "vs_control": -0.003207759026077835
+      }
+    },
+    "2020": {
+      "FIDE rules (control)": {
+        "log_loss": 0.6125719217927763,
+        "brier": 0.1281410033800897,
+        "vs_control": 0.0
+      },
+      "Stretched table": {
+        "log_loss": 0.6049057843004966,
+        "brier": 0.12581175025025032,
+        "vs_control": -0.007666137492279703
+      },
+      "K-factor by age": {
+        "log_loss": 0.6130333424310217,
+        "brier": 0.12827714553747896,
+        "vs_control": 0.0004614206382454363
+      },
+      "Inactivity adjustment": {
+        "log_loss": 0.610109454140776,
+        "brier": 0.12729720970337774,
+        "vs_control": -0.0024624676520003546
+      },
+      "Uncertainty K-factor": {
+        "log_loss": 0.6184985476841677,
+        "brier": 0.13045079651808245,
+        "vs_control": 0.005926625891391403
+      },
+      "Table + inactivity adjustment": {
+        "log_loss": 0.6026493759183329,
+        "brier": 0.12499110498157935,
+        "vs_control": -0.00992254587444339
+      },
+      "Table + inactivity + uncertainty K": {
+        "log_loss": 0.6069172837750448,
+        "brier": 0.12675095490400026,
+        "vs_control": -0.005654638017731448
+      }
+    },
+    "2021": {
+      "FIDE rules (control)": {
+        "log_loss": 0.6119954065071155,
+        "brier": 0.12633996795587069,
+        "vs_control": 0.0
+      },
+      "Stretched table": {
+        "log_loss": 0.6033102567743284,
+        "brier": 0.12369300592848002,
+        "vs_control": -0.008685149732787216
+      },
+      "K-factor by age": {
+        "log_loss": 0.6120869953081663,
+        "brier": 0.1263007037550493,
+        "vs_control": 9.158880105083012e-05
+      },
+      "Inactivity adjustment": {
+        "log_loss": 0.6095520881674384,
+        "brier": 0.1255173743273739,
+        "vs_control": -0.002443318339677105
+      },
+      "Uncertainty K-factor": {
+        "log_loss": 0.6181624140996873,
+        "brier": 0.12871537824400262,
+        "vs_control": 0.006167007592571762
+      },
+      "Table + inactivity adjustment": {
+        "log_loss": 0.6012551907697264,
+        "brier": 0.12293931124420973,
+        "vs_control": -0.01074021573738909
+      },
+      "Table + inactivity + uncertainty K": {
+        "log_loss": 0.6054170333297322,
+        "brier": 0.12465622100026925,
+        "vs_control": -0.00657837317738331
+      }
+    },
+    "2022": {
+      "FIDE rules (control)": {
+        "log_loss": 0.6141722974404309,
+        "brier": 0.1274886336476178,
+        "vs_control": 0.0
+      },
+      "Stretched table": {
+        "log_loss": 0.6029790377931981,
+        "brier": 0.1241413742021412,
+        "vs_control": -0.011193259647232792
+      },
+      "K-factor by age": {
+        "log_loss": 0.6145536335024462,
+        "brier": 0.12758249592297063,
+        "vs_control": 0.0003813360620153315
+      },
+      "Inactivity adjustment": {
+        "log_loss": 0.6105502230983766,
+        "brier": 0.12630079424310808,
+        "vs_control": -0.0036220743420542923
+      },
+      "Uncertainty K-factor": {
+        "log_loss": 0.619805148989514,
+        "brier": 0.1297084878790797,
+        "vs_control": 0.005632851549083159
+      },
+      "Table + inactivity adjustment": {
+        "log_loss": 0.6002608183402673,
+        "brier": 0.12317111811051032,
+        "vs_control": -0.013911479100163588
+      },
+      "Table + inactivity + uncertainty K": {
+        "log_loss": 0.6047814520208423,
+        "brier": 0.12503036380824975,
+        "vs_control": -0.009390845419588605
+      }
+    },
+    "2023": {
+      "FIDE rules (control)": {
+        "log_loss": 0.6069673051697054,
+        "brier": 0.1259387363671917,
+        "vs_control": 0.0
+      },
+      "Stretched table": {
+        "log_loss": 0.5998120353774867,
+        "brier": 0.12375179395179615,
+        "vs_control": -0.007155269792218796
+      },
+      "K-factor by age": {
+        "log_loss": 0.6074630674108553,
+        "brier": 0.126068933302796,
+        "vs_control": 0.0004957622411498467
+      },
+      "Inactivity adjustment": {
+        "log_loss": 0.6045391193437631,
+        "brier": 0.12509412947326576,
+        "vs_control": -0.002428185825942367
+      },
+      "Uncertainty K-factor": {
+        "log_loss": 0.6150133812862185,
+        "brier": 0.1291177570911448,
+        "vs_control": 0.008046076116513057
+      },
+      "Table + inactivity adjustment": {
+        "log_loss": 0.598217442626624,
+        "brier": 0.1231416474582722,
+        "vs_control": -0.008749862543081428
+      },
+      "Table + inactivity + uncertainty K": {
+        "log_loss": 0.6044702401972833,
+        "brier": 0.12578708258010943,
+        "vs_control": -0.0024970649724221122
+      }
+    },
+    "2024": {
+      "FIDE rules (control)": {
+        "log_loss": 0.6053796330033772,
+        "brier": 0.12451344347605839,
+        "vs_control": 0.0
+      },
+      "Stretched table": {
+        "log_loss": 0.6020598643533644,
+        "brier": 0.12338580042257957,
+        "vs_control": -0.00331976865001272
+      },
+      "K-factor by age": {
+        "log_loss": 0.6062989652753743,
+        "brier": 0.12480747716002737,
+        "vs_control": 0.0009193322719971977
+      },
+      "Inactivity adjustment": {
+        "log_loss": 0.604531907271219,
+        "brier": 0.12416499147540357,
+        "vs_control": -0.0008477257321581805
+      },
+      "Uncertainty K-factor": {
+        "log_loss": 0.6129926799587111,
+        "brier": 0.12758349092925175,
+        "vs_control": 0.007613046955334001
+      },
+      "Table + inactivity adjustment": {
+        "log_loss": 0.6016588291950428,
+        "brier": 0.12319865440263815,
+        "vs_control": -0.003720803808334402
+      },
+      "Table + inactivity + uncertainty K": {
+        "log_loss": 0.6087944528681607,
+        "brier": 0.12617775752028648,
+        "vs_control": 0.0034148198647835954
+      }
+    },
+    "2025": {
+      "FIDE rules (control)": {
+        "log_loss": 0.6008748896365851,
+        "brier": 0.12347729339235278,
+        "vs_control": 0.0
+      },
+      "Stretched table": {
+        "log_loss": 0.5986637594224146,
+        "brier": 0.12275431475689064,
+        "vs_control": -0.002211130214170591
+      },
+      "K-factor by age": {
+        "log_loss": 0.6017600744967448,
+        "brier": 0.12376421152958679,
+        "vs_control": 0.0008851848601596974
+      },
+      "Inactivity adjustment": {
+        "log_loss": 0.6004227870855282,
+        "brier": 0.12331530143219323,
+        "vs_control": -0.00045210255105688704
+      },
+      "Uncertainty K-factor": {
+        "log_loss": 0.6083496474471773,
+        "brier": 0.1264957050035307,
+        "vs_control": 0.007474757810592186
+      },
+      "Table + inactivity adjustment": {
+        "log_loss": 0.5984906683530206,
+        "brier": 0.12267921670986563,
+        "vs_control": -0.002384221283564626
+      },
+      "Table + inactivity + uncertainty K": {
+        "log_loss": 0.6059299955888516,
+        "brier": 0.12575864771339884,
+        "vs_control": 0.005055105952266449
+      }
+    }
+  },
+  "rating_shift_by_age": [
+    {
+      "system": "Stretched table",
+      "under 21": -6.055865063744094,
+      "21-49": -0.46881270957378224,
+      "50 and over": -1.080370909516141
+    },
+    {
+      "system": "K-factor by age",
+      "under 21": 1.593887500577528,
+      "21-49": 1.5472860426101371,
+      "50 and over": 0.4474117570304492
+    },
+    {
+      "system": "Inactivity adjustment",
+      "under 21": -1.7531249219337435,
+      "21-49": -19.913661063156248,
+      "50 and over": -36.63675023498578
+    },
+    {
+      "system": "Uncertainty K-factor",
+      "under 21": -9.603184730396473,
+      "21-49": -7.84099365711074,
+      "50 and over": -5.687101884650698
+    },
+    {
+      "system": "Table + inactivity adjustment",
+      "under 21": -7.401747282453629,
+      "21-49": -20.270771237717398,
+      "50 and over": -38.06427863190465
+    },
+    {
+      "system": "Table + inactivity + uncertainty K",
+      "under 21": -14.63520344608437,
+      "21-49": -25.62034885143549,
+      "50 and over": -41.130920347414616
+    }
+  ],
+  "top_2700": [
+    {
+      "id": "1503014",
+      "rating": 2823,
+      "flag": "",
+      "classical_games_last_12_months": 18,
+      "months_since_last_game": 3,
+      "name": "Carlsen, Magnus",
+      "age": 36,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "4100018",
+      "rating": 2812,
+      "flag": "i",
+      "classical_games_last_12_months": 0,
+      "months_since_last_game": null,
+      "name": "Kasparov, Garry",
+      "age": 63,
+      "return_adjustment": -173.67007606386525
+    },
+    {
+      "id": "2016192",
+      "rating": 2792,
+      "flag": "",
+      "classical_games_last_12_months": 36,
+      "months_since_last_game": 5,
+      "name": "Nakamura, Hikaru",
+      "age": 39,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "2020009",
+      "rating": 2789,
+      "flag": "",
+      "classical_games_last_12_months": 67,
+      "months_since_last_game": 1,
+      "name": "Caruana, Fabiano",
+      "age": 34,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "14205483",
+      "rating": 2778,
+      "flag": "",
+      "classical_games_last_12_months": 72,
+      "months_since_last_game": 1,
+      "name": "Sindarov, Javokhir",
+      "age": 21,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "5202213",
+      "rating": 2774,
+      "flag": "",
+      "classical_games_last_12_months": 52,
+      "months_since_last_game": 1,
+      "name": "So, Wesley",
+      "age": 33,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "12940690",
+      "rating": 2764,
+      "flag": "",
+      "classical_games_last_12_months": 89,
+      "months_since_last_game": 1,
+      "name": "Keymer, Vincent",
+      "age": 22,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "14204118",
+      "rating": 2762,
+      "flag": "",
+      "classical_games_last_12_months": 69,
+      "months_since_last_game": 2,
+      "name": "Abdusattorov, Nodirbek",
+      "age": 22,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "25059530",
+      "rating": 2761,
+      "flag": "",
+      "classical_games_last_12_months": 89,
+      "months_since_last_game": 1,
+      "name": "Praggnanandhaa R",
+      "age": 21,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "35009192",
+      "rating": 2759,
+      "flag": "",
+      "classical_games_last_12_months": 68,
+      "months_since_last_game": 2,
+      "name": "Erigaisi Arjun",
+      "age": 23,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "12573981",
+      "rating": 2757,
+      "flag": "",
+      "classical_games_last_12_months": 42,
+      "months_since_last_game": 2,
+      "name": "Firouzja, Alireza",
+      "age": 23,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "24116068",
+      "rating": 2757,
+      "flag": "",
+      "classical_games_last_12_months": 74,
+      "months_since_last_game": 1,
+      "name": "Giri, Anish",
+      "age": 32,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "4101588",
+      "rating": 2753,
+      "flag": "i",
+      "classical_games_last_12_months": 0,
+      "months_since_last_game": 92,
+      "name": "Kramnik, Vladimir",
+      "age": 51,
+      "return_adjustment": -173.67007606386525
+    },
+    {
+      "id": "8603405",
+      "rating": 2752,
+      "flag": "",
+      "classical_games_last_12_months": 43,
+      "months_since_last_game": 2,
+      "name": "Wei, Yi",
+      "age": 27,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "14109603",
+      "rating": 2750,
+      "flag": "i",
+      "classical_games_last_12_months": 0,
+      "months_since_last_game": 40,
+      "name": "Karjakin, Sergey",
+      "age": 36,
+      "return_adjustment": -50.21832837676724
+    },
+    {
+      "id": "1170546",
+      "rating": 2743,
+      "flag": "",
+      "classical_games_last_12_months": 10,
+      "months_since_last_game": 3,
+      "name": "Duda, Jan-Krzysztof",
+      "age": 28,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "5000017",
+      "rating": 2739,
+      "flag": "",
+      "classical_games_last_12_months": 3,
+      "months_since_last_game": 5,
+      "name": "Anand, Viswanathan",
+      "age": 57,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "12521213",
+      "rating": 2737,
+      "flag": "",
+      "classical_games_last_12_months": 72,
+      "months_since_last_game": 1,
+      "name": "Tabatabaei, M. Amin",
+      "age": 25,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "8603677",
+      "rating": 2733,
+      "flag": "",
+      "classical_games_last_12_months": 10,
+      "months_since_last_game": 2,
+      "name": "Ding, Liren",
+      "age": 34,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "3503240",
+      "rating": 2732,
+      "flag": "",
+      "classical_games_last_12_months": 2,
+      "months_since_last_game": 6,
+      "name": "Dominguez Perez, Leinier",
+      "age": 43,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "12401137",
+      "rating": 2732,
+      "flag": "",
+      "classical_games_last_12_months": 16,
+      "months_since_last_game": 2,
+      "name": "Le, Quang Liem",
+      "age": 35,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "738590",
+      "rating": 2726,
+      "flag": "",
+      "classical_games_last_12_months": 49,
+      "months_since_last_game": 1,
+      "name": "Rapport, Richard",
+      "age": 30,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "13300474",
+      "rating": 2725,
+      "flag": "",
+      "classical_games_last_12_months": 55,
+      "months_since_last_game": 1,
+      "name": "Aronian, Levon",
+      "age": 44,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "2093596",
+      "rating": 2725,
+      "flag": "",
+      "classical_games_last_12_months": 82,
+      "months_since_last_game": 2,
+      "name": "Niemann, Hans Moke",
+      "age": 23,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "13401319",
+      "rating": 2720,
+      "flag": "",
+      "classical_games_last_12_months": 70,
+      "months_since_last_game": 1,
+      "name": "Mamedyarov, Shakhriyar",
+      "age": 41,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "4168119",
+      "rating": 2719,
+      "flag": "",
+      "classical_games_last_12_months": 57,
+      "months_since_last_game": 2,
+      "name": "Nepomniachtchi, Ian",
+      "age": 36,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "25092340",
+      "rating": 2718,
+      "flag": "",
+      "classical_games_last_12_months": 64,
+      "months_since_last_game": 2,
+      "name": "Nihal Sarin",
+      "age": 22,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "623539",
+      "rating": 2718,
+      "flag": "",
+      "classical_games_last_12_months": 60,
+      "months_since_last_game": 1,
+      "name": "Vachier-Lagrave, Maxime",
+      "age": 36,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "44599790",
+      "rating": 2716,
+      "flag": "",
+      "classical_games_last_12_months": 67,
+      "months_since_last_game": 1,
+      "name": "Erdogmus, Yagiz Kaan",
+      "age": 15,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "4158814",
+      "rating": 2714,
+      "flag": "",
+      "classical_games_last_12_months": 20,
+      "months_since_last_game": 1,
+      "name": "Andreikin, Dmitry",
+      "age": 36,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "8603820",
+      "rating": 2710,
+      "flag": "",
+      "classical_games_last_12_months": 54,
+      "months_since_last_game": 2,
+      "name": "Yu, Yangyi",
+      "age": 32,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "2040506",
+      "rating": 2708,
+      "flag": "",
+      "classical_games_last_12_months": 52,
+      "months_since_last_game": 1,
+      "name": "Sevian, Samuel",
+      "age": 26,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "1039784",
+      "rating": 2706,
+      "flag": "",
+      "classical_games_last_12_months": 106,
+      "months_since_last_game": 1,
+      "name": "Van Foreest, Jorden",
+      "age": 27,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "12539929",
+      "rating": 2705,
+      "flag": "",
+      "classical_games_last_12_months": 68,
+      "months_since_last_game": 2,
+      "name": "Maghsoodloo, Parham",
+      "age": 26,
+      "return_adjustment": 0.0
+    },
+    {
+      "id": "46616543",
+      "rating": 2703,
+      "flag": "",
+      "classical_games_last_12_months": 59,
+      "months_since_last_game": 2,
+      "name": "Gukesh D",
+      "age": 20,
+      "return_adjustment": 0.0
+    }
+  ],
+  "nakamura_lists": [
+    {
+      "list": "2024-01",
+      "rating": 2788,
+      "games": 0
+    },
+    {
+      "list": "2024-02",
+      "rating": 2788,
+      "games": 0
+    },
+    {
+      "list": "2024-03",
+      "rating": 2789,
+      "games": 3
+    },
+    {
+      "list": "2024-04",
+      "rating": 2789,
+      "games": 0
+    },
+    {
+      "list": "2024-05",
+      "rating": 2794,
+      "games": 14
+    },
+    {
+      "list": "2024-06",
+      "rating": 2794,
+      "games": 0
+    },
+    {
+      "list": "2024-07",
+      "rating": 2802,
+      "games": 10
+    },
+    {
+      "list": "2024-08",
+      "rating": 2802,
+      "games": 0
+    },
+    {
+      "list": "2024-09",
+      "rating": 2802,
+      "games": 0
+    },
+    {
+      "list": "2024-10",
+      "rating": 2802,
+      "games": 0
+    },
+    {
+      "list": "2024-11",
+      "rating": 2802,
+      "games": 0
+    },
+    {
+      "list": "2024-12",
+      "rating": 2802,
+      "games": 0
+    },
+    {
+      "list": "2025-01",
+      "rating": 2802,
+      "games": 0
+    },
+    {
+      "list": "2025-02",
+      "rating": 2802,
+      "games": 0
+    },
+    {
+      "list": "2025-03",
+      "rating": 2802,
+      "games": 0
+    },
+    {
+      "list": "2025-04",
+      "rating": 2804,
+      "games": 8
+    },
+    {
+      "list": "2025-05",
+      "rating": 2804,
+      "games": 0
+    },
+    {
+      "list": "2025-06",
+      "rating": 2804,
+      "games": 0
+    },
+    {
+      "list": "2025-07",
+      "rating": 2807,
+      "games": 10
+    },
+    {
+      "list": "2025-08",
+      "rating": 2807,
+      "games": 0
+    },
+    {
+      "list": "2025-09",
+      "rating": 2807,
+      "games": 0
+    },
+    {
+      "list": "2025-10",
+      "rating": 2816,
+      "games": 11
+    },
+    {
+      "list": "2025-11",
+      "rating": 2813,
+      "games": 6
+    },
+    {
+      "list": "2025-12",
+      "rating": 2810,
+      "games": 5
+    },
+    {
+      "list": "2026-01",
+      "rating": 2810,
+      "games": 0
+    },
+    {
+      "list": "2026-02",
+      "rating": 2810,
+      "games": 0
+    },
+    {
+      "list": "2026-03",
+      "rating": 2810,
+      "games": 0
+    },
+    {
+      "list": "2026-04",
+      "rating": 2810,
+      "games": 0
+    },
+    {
+      "list": "2026-05",
+      "rating": 2792,
+      "games": 14
+    },
+    {
+      "list": "2026-06",
+      "rating": 2792,
+      "games": 0
+    },
+    {
+      "list": "2026-07",
+      "rating": 2792,
+      "games": 0
+    },
+    {
+      "list": "2026-08",
+      "rating": 2792,
+      "games": 0
+    },
+    {
+      "list": "2026-09",
+      "rating": 2792,
+      "games": 0
+    }
+  ],
+  "games_by_season": {
+    "2014": 119831,
+    "2015": 127503,
+    "2016": 139613,
+    "2017": 147203,
+    "2018": 157365,
+    "2019": 72769,
+    "2020": 61696,
+    "2021": 110708,
+    "2022": 134665,
+    "2023": 147576,
+    "2024": 149726,
+    "2025": 141723
+  }
+}

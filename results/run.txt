@@ -1,0 +1,71 @@
+train 149726 games, test 141723 games, players 82111
+
+model                               log loss    brier             vs FIDE (95% CI)
+FIDE as published                    0.60087  0.12348 +0.00000 [+0.00000, +0.00000]
+FIDE + white advantage               0.59729  0.12195 -0.00359 [-0.00392, -0.00324]
+FIDE + white + gap scale             0.59498  0.12100 -0.00590 [-0.00671, -0.00501]
+FIDE + white + age                   0.59404  0.12071 -0.00683 [-0.00747, -0.00624]
+FIDE + white + recent form           0.59442  0.12089 -0.00645 [-0.00703, -0.00584]
+FIDE + white + gap + age + form      0.59146  0.11965 -0.00942 [-0.01023, -0.00861]
+Elo rebuilt on this data             0.64214  0.13858 +0.04127 [+0.03872, +0.04438]
+Glicko-2 rebuilt on this data        0.63995  0.13752 +0.03907 [+0.03629, +0.04225]
+
+Glicko-2 minus Elo, same data: -0.00220 [-0.00363, -0.00087]  (RD 100, tau 0.6)
+
+Fitted offsets in Elo points: {'white advantage': 33.7, '11 and under': 36.8, '12-13': 50.7, '14-15': 46.7, '16-17': 36.2, '18-20': 31.8, '50-64': -36.5, '65+': -71.0}
+Form coefficients: {'FIDE + white + recent form': 315.3, 'FIDE + white + gap + age + form': 193.5}
+Gap-scale model: {'gap scale': 0.822, 'white advantage': 32.017}
+Full model: {'gap scale': 0.879, 'white advantage': 32.335, '11 and under': 9.971, '12-13': 25.349, '14-15': 26.489, '16-17': 20.645, '18-20': 21.07, '50-64': -33.182, '65+': -66.825, 'form': 193.531}
+
+Score vs FIDE expectation by age (test year):
+   11 and under:  +2.55%  (5043 player-games)
+          12-13:  +3.23%  (12682 player-games)
+          14-15:  +2.95%  (24750 player-games)
+          16-17:  +2.03%  (34316 player-games)
+          18-20:  +1.28%  (37856 player-games)
+          21-49:  -0.64%  (129537 player-games)
+          50-64:  -4.08%  (26823 player-games)
+            65+:  -4.20%  (11969 player-games)
+
+By rating band:
+   1400-1599:  +0.66%  (5409)
+   1600-1799:  +1.52%  (16094)
+   1800-1999:  +1.51%  (42081)
+   2000-2199:  +0.93%  (66638)
+   2200-2399:  -1.07%  (88189)
+   2400-2599:  -0.80%  (56527)
+   2600-2799:  -1.59%  (8462)
+       2700+:  -8.12%  (46)
+
+Walk-forward, change in log loss vs FIDE by test season:
+  2015-16 (127503 games): white advantage -0.0032  white + gap scale -0.0052  white + age -0.0064  white + recent for -0.0054  white + gap + age  -0.0085  Elo rebuilt on thi +0.0063  Glicko-2 rebuilt o +0.0057  gap scale 0.855
+  2016-17 (139613 games): white advantage -0.0033  white + gap scale -0.0063  white + age -0.0076  white + recent for -0.0062  white + gap + age  -0.0104  Elo rebuilt on thi +0.0103  Glicko-2 rebuilt o +0.0098  gap scale 0.865
+  2017-18 (147203 games): white advantage -0.0034  white + gap scale -0.0068  white + age -0.0084  white + recent for -0.0062  white + gap + age  -0.0109  Elo rebuilt on thi +0.0132  Glicko-2 rebuilt o +0.0137  gap scale 0.837
+  2018-19 (157365 games): white advantage -0.0032  white + gap scale -0.0078  white + age -0.0087  white + recent for -0.0068  white + gap + age  -0.0122  Elo rebuilt on thi +0.0150  Glicko-2 rebuilt o +0.0154  gap scale 0.831
+  2019-20 ( 72769 games): white advantage -0.0034  white + gap scale -0.0092  white + age -0.0098  white + recent for -0.0072  white + gap + age  -0.0139  Elo rebuilt on thi +0.0170  Glicko-2 rebuilt o +0.0189  gap scale 0.803
+  2020-21 ( 61696 games): white advantage -0.0032  white + gap scale -0.0112  white + age -0.0122  white + recent for -0.0083  white + gap + age  -0.0171  Elo rebuilt on thi +0.0242  Glicko-2 rebuilt o +0.0279  gap scale 0.777
+  2021-22 (110708 games): white advantage -0.0036  white + gap scale -0.0116  white + age -0.0121  white + recent for -0.0098  white + gap + age  -0.0180  Elo rebuilt on thi +0.0252  Glicko-2 rebuilt o +0.0272  gap scale 0.740
+  2022-23 (134665 games): white advantage -0.0034  white + gap scale -0.0147  white + age -0.0136  white + recent for -0.0110  white + gap + age  -0.0215  Elo rebuilt on thi +0.0283  Glicko-2 rebuilt o +0.0294  gap scale 0.743
+  2023-24 (147576 games): white advantage -0.0036  white + gap scale -0.0093  white + age -0.0101  white + recent for -0.0099  white + gap + age  -0.0153  Elo rebuilt on thi +0.0367  Glicko-2 rebuilt o +0.0364  gap scale 0.708
+  2024-25 (149726 games): white advantage -0.0037  white + gap scale -0.0067  white + age -0.0072  white + recent for -0.0074  white + gap + age  -0.0107  Elo rebuilt on thi +0.0434  Glicko-2 rebuilt o +0.0422  gap scale 0.770
+  2025-26 (141723 games): white advantage -0.0036  white + gap scale -0.0059  white + age -0.0068  white + recent for -0.0065  white + gap + age  -0.0094  Elo rebuilt on thi +0.0413  Glicko-2 rebuilt o +0.0391  gap scale 0.822
+Pooled: {'FIDE as published': '+0.00000 [+0.00000, +0.00000]', 'FIDE + white advantage': '-0.00343 [-0.00354, -0.00332]', 'FIDE + white + gap scale': '-0.00834 [-0.00873, -0.00796]', 'FIDE + white + age': '-0.00910 [-0.00941, -0.00880]', 'FIDE + white + recent form': '-0.00764 [-0.00789, -0.00740]', 'FIDE + white + gap + age + form': '-0.01309 [-0.01356, -0.01265]', 'Elo rebuilt on this data': '+0.02421 [+0.02344, +0.02503]', 'Glicko-2 rebuilt on this data': '+0.02433 [+0.02353, +0.02519]'}
+
+Calibration (rating diff bin: expected vs actual):
+   -400: 0.096 vs 0.118  (6057)
+   -350: 0.135 vs 0.197  (3648)
+   -300: 0.172 vs 0.251  (5726)
+   -250: 0.216 vs 0.302  (8501)
+   -200: 0.269 vs 0.349  (11498)
+   -150: 0.327 vs 0.408  (12998)
+   -100: 0.392 vs 0.458  (11777)
+    -50: 0.463 vs 0.512  (9758)
+     +0: 0.535 vs 0.578  (9741)
+    +50: 0.607 vs 0.620  (11691)
+   +100: 0.671 vs 0.677  (13123)
+   +150: 0.731 vs 0.727  (11984)
+   +200: 0.783 vs 0.779  (8945)
+   +250: 0.828 vs 0.817  (6098)
+   +300: 0.865 vs 0.855  (3770)
+   +350: 0.895 vs 0.873  (2356)
+   +400: 0.909 vs 0.934  (4052)
