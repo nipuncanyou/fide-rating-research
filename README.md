@@ -1,5 +1,7 @@
 # Where FIDE Ratings Miss
 
+Report: https://nipuncanyou.github.io/fide-rating-research/report/
+
 An out-of-sample test of how well published FIDE classical ratings predict game results, and which corrections improve them.
 
 1,510,378 classical games from The Week in Chess, October 2014 to September 2026, checked against 169 FIDE monthly lists (September 2012 onward) so that rapid, blitz and Chess960 events are removed. Every correction is fitted on one season (October to September) and tested on the next, for 11 test seasons. Rule changes are then replayed month by month against FIDE's current rules, using the K-factor FIDE actually applied.
